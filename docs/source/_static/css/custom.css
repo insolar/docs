@@ -1,0 +1,42 @@
+@font-face {
+  font-family: Montserrat,"Open Sans",Helvetica,Arial,sans-serif;
+  src: url("../fonts/Montserrat-Regular.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+    font-family: "Montserrat", sans-serif
+} 
+
+h1 {
+    font-family: "Montserrat", sans-serif
+} 
+
+h2 {
+    font-family: "Montserrat", sans-serif
+}
+
+h3 {
+    font-family: "Montserrat", sans-serif
+}
+
+h4 {
+    font-family: "Montserrat", sans-serif
+}
+
+h5 {
+    font-family: "Montserrat", sans-serif
+}
+
+h6 {
+    font-family: "Montserrat", sans-serif
+}
+
+h7 {
+    font-family: "Montserrat", sans-serif
+}
+
+h8 {
+    font-family: "Montserrat", sans-serif
+}

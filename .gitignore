@@ -1,0 +1,14 @@
+### MacOS stuff
+.DS_Store
+
+### IntelliJ project files
+.idea
+*.iml
+out
+.gen
+
+### VSCode configuration
+.vscode
+
+# Local doc build directory
+/docs/build
