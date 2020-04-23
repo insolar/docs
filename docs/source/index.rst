@@ -120,7 +120,7 @@ In the MainNet.
 
 .. toctree::
    :hidden:
-   :caption: Exchange and wallet developers
+   :caption: Exchange & wallet developers
 
    use-cases
    requester

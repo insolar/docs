@@ -75,6 +75,8 @@ html_css_files = [
 
 html_logo = 'imgs/Logo_light.png'
 
+html_favicon = 'imgs/favicon.png'
+
 html_theme_options = {
     'display_version': True,
     'prev_next_buttons_location': 'bottom',
