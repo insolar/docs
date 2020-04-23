@@ -1,3 +1,7 @@
+ol li p:last-child, ul li p:last-child { margin-bottom: 20px !important}
+
+.admonition p:last-child {margin-bottom: 0 !important }
+
 @font-face {
   font-family: Montserrat,"Open Sans",Helvetica,Arial,sans-serif;
   src: url("../fonts/Montserrat-Regular.otf");

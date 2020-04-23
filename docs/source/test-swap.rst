@@ -214,6 +214,8 @@ To migrate the test INS tokens and swap them to XNS coins:
    .. image:: imgs/mig-test/select-testnet.png
       :width: 600px
 
+   |
+
 #. Click :guilabel:`CREATE A NEW WALLET`:
 
    .. image:: imgs/mig-test/create-test-ins-wlt.png
@@ -264,10 +266,14 @@ To migrate the test INS tokens and swap them to XNS coins:
    .. image:: imgs/mig-test/ins-word-order.png
       :width: 350px
 
+   |
+
 #. Wait for the Wallet validation to complete and all features to become available:
 
    .. image:: imgs/mig-test/one-more-thing.png
       :width: 400px
+
+   |
 
 #. Once the Wallet is created, receive congratulations from Insolar:
 
