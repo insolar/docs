@@ -5,11 +5,48 @@
 
 @font-face {
     font-family: 'montserratregular';
-    src: url('https://dc-plgrnd.readthedocs.io/en/latest/_static/css/fonts/montserrat-regular-webfont.woff2') format('woff2'),
-         url('https://dc-plgrnd.readthedocs.io/en/latest/_static/css/fonts/montserrat-regular-webfont.woff') format('woff');
+    src: url('https://docs.insolar.io/en/latest/_static/css/fonts/montserrat-regular-webfont.woff2') format('woff2'),
+         url('https://docs.insolar.io/en/latest/_static/css/fonts/montserrat-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+}
 
+@font-face {
+    font-family: 'Source';
+    src: url('https://docs.insolar.io/en/latest/_static/css/fonts/sourcecodepro-regular-webfont.woff2') format('woff2'),
+         url('https://docs.insolar.io/en/latest/_static/css/fonts/sourcecodepro-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'montserratbold';
+    src: url('https://docs.insolar.io/en/latest/_static/css/fonts/montserrat-bold-webfont.woff2') format('woff2'),
+         url('https://docs.insolar.io/en/latest/_static/css/fonts/montserrat-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'montserratmedium';
+    src: url('https://docs.insolar.io/en/latest/_static/css/fonts/montserrat-medium-webfont.woff2') format('woff2'),
+         url('https://docs.insolar.io/en/latest/_static/css/fonts/montserrat-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+b, strong {
+  font-family: 'montserratmedium'
+}
+
+.rst-content code {
+  font-family: "Source";
+  font-size: 100%;
+}
+
+.rst-content div[class^='highlight'] pre {
+    font-family: "Source";
+    font-size: 90%;
 }
 
 body {
@@ -17,33 +54,33 @@ body {
 } 
 
 h1 {
-    font-family: "montserratregular", sans-serif
+    font-family: "montserratbold", sans-serif
 } 
 
 h2 {
-    font-family: "montserratregular", sans-serif
+    font-family: "montserratbold", sans-serif
 }
 
 h3 {
-    font-family: "montserratregular", sans-serif
+    font-family: "montserratbold", sans-serif
 }
 
 h4 {
-    font-family: "montserratregular", sans-serif
+    font-family: "montserratbold", sans-serif
 }
 
 h5 {
-    font-family: "montserratregular", sans-serif
+    font-family: "montserratbold", sans-serif
 }
 
 h6 {
-    font-family: "montserratregular", sans-serif
+    font-family: "montserratbold", sans-serif
 }
 
 h7 {
-    font-family: "montserratregular", sans-serif
+    font-family: "montserratbold", sans-serif
 }
 
 h8 {
-    font-family: "montserratregular", sans-serif
+    font-family: "montserratbold", sans-serif
 }
