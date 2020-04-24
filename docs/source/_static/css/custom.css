@@ -2,45 +2,48 @@
 
 .rst-content .section .admonition p:last-child {margin-bottom: 0 !important }
 
+
 @font-face {
-  font-family: Montserrat,"Open Sans",Helvetica,Arial,sans-serif;
-  src: url("../fonts/Montserrat-Regular.otf");
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'montserratregular';
+    src: url('https://dc-plgrnd.readthedocs.io/en/latest/_static/css/fonts/montserrat-regular-webfont.woff2') format('woff2'),
+         url('https://dc-plgrnd.readthedocs.io/en/latest/_static/css/fonts/montserrat-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
 body {
-    font-family: "Montserrat", sans-serif
+    font-family: "montserratregular", sans-serif
 } 
 
 h1 {
-    font-family: "Montserrat", sans-serif
+    font-family: "montserratregular", sans-serif
 } 
 
 h2 {
-    font-family: "Montserrat", sans-serif
+    font-family: "montserratregular", sans-serif
 }
 
 h3 {
-    font-family: "Montserrat", sans-serif
+    font-family: "montserratregular", sans-serif
 }
 
 h4 {
-    font-family: "Montserrat", sans-serif
+    font-family: "montserratregular", sans-serif
 }
 
 h5 {
-    font-family: "Montserrat", sans-serif
+    font-family: "montserratregular", sans-serif
 }
 
 h6 {
-    font-family: "Montserrat", sans-serif
+    font-family: "montserratregular", sans-serif
 }
 
 h7 {
-    font-family: "Montserrat", sans-serif
+    font-family: "montserratregular", sans-serif
 }
 
 h8 {
-    font-family: "Montserrat", sans-serif
+    font-family: "montserratregular", sans-serif
 }
