@@ -56,21 +56,15 @@ To create and set up a MetaMask Ethereum wallet:
    .. image:: imgs/mig-test/selecting-ropsten.png
       :width: 700px
 
-   |
-
 #. In the bottom left corner, click :guilabel:`Add Token`:
 
    .. image:: imgs/mig-test/add-token.png
       :width: 700px
 
-   |
-
 #. On the **Add Tokens** screen, open the :guilabel:`Custom Token` tab:
 
    .. image:: imgs/mig-test/custom-token.png
       :width: 300px
-
-   |
 
 #. Copy the INS token contract address -- click the copy icon |copy-icon| in the right corner of the following code block:
 
@@ -98,8 +92,6 @@ To create and set up a MetaMask Ethereum wallet:
    .. image:: imgs/mig-test/wallet-setup.png
       :width: 700px
 
-   |
-
 .. _acquire_test_tokens_and_swap:
 
 Acquiring test ETH coins and swapping them to test INS tokens
@@ -111,8 +103,6 @@ To acquire, first, test ETH, then swap them to test INS tokens:
 
    .. image:: imgs/mig-test/eth-deposit.png
       :width: 700px
-
-   |
 
 #. In the **Deposit Ether** window, click :guilabel:`Get Ether` next to **Test Faucet**:
 
@@ -143,8 +133,6 @@ To acquire, first, test ETH, then swap them to test INS tokens:
    .. image:: imgs/mig-test/meta-balance.png
       :width: 700px
 
-   |
-
 #. Again, copy the INS token contract address -- click the copy icon |copy-icon| in the right corner of the following code block:
 
    .. code-block::
@@ -161,8 +149,6 @@ To acquire, first, test ETH, then swap them to test INS tokens:
    .. image:: imgs/mig-test/meta-transfer-details.png
       :width: 300px
 
-   |
-
 #. On the **Send ETH** screen, you don't need to send actual ETH to the token contract but a small amount of ETH will be automatically subtracted to pay for transaction processing.
    
    However, setting the correct gas value is required. To set it, click :guilabel:`Advanced Options`:
@@ -170,14 +156,10 @@ To acquire, first, test ETH, then swap them to test INS tokens:
    .. image:: imgs/mig-test/advanced-options.png
       :width: 300px
 
-   |
-
 #. On the **Customize Gas** screen, set the :guilabel:`Gas Limit` to ``80000`` (eighty thousand) and click :guilabel:`Save`:
 
    .. image:: imgs/mig-test/gas-limit.png
       :width: 300px
-
-   |
 
    .. caution:: If the gas limit value is lower than 80,000, the token contract will fail.
 
@@ -190,8 +172,6 @@ To acquire, first, test ETH, then swap them to test INS tokens:
 
    .. image:: imgs/mig-test/finally-confirm.png
       :width: 300px
-
-   |
 
 #. Repeat the procedure of sending ETH to INS token contract several more times to acquire enough test INS tokens.
 
@@ -213,8 +193,6 @@ To migrate the test INS tokens and swap them to XNS coins:
 
    .. image:: imgs/mig-test/select-testnet.png
       :width: 600px
-
-   |
 
 #. Click :guilabel:`CREATE A NEW WALLET`:
 
@@ -266,14 +244,10 @@ To migrate the test INS tokens and swap them to XNS coins:
    .. image:: imgs/mig-test/ins-word-order.png
       :width: 350px
 
-   |
-
 #. Wait for the Wallet validation to complete and all features to become available:
 
    .. image:: imgs/mig-test/one-more-thing.png
       :width: 400px
-
-   |
 
 #. Once the Wallet is created, receive congratulations from Insolar:
 
@@ -309,14 +283,10 @@ To migrate the test INS tokens and swap them to XNS coins:
    .. image:: imgs/mig-test/meta-send-ins.png
       :width: 700px
 
-   |
-
 #. On the **Add Recipient** screen, paste the copied migration address to the search field:
 
    .. image:: imgs/mig-test/send-search-field.png
       :width: 300px
-
-   |
 
 #. On the **Send Tokens** screen, first, click :guilabel:`Max`, then :guilabel:`Next`:
 
