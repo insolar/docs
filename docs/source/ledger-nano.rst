@@ -22,7 +22,7 @@ To use the Insolar application on your Ledger Nano S or X hardware wallet, make 
 
    .. important::
 
-     During the setup, you are required to choose a PIN and write down the recovery phrase for the device. Without the PIN you will be unable to unlock the device and without the recovery phrase you will be unable restore access to your wallet.
+     During the setup, you are required to choose a PIN and write down the recovery phrase for the device. Without the PIN you won't be able to unlock the device and without the recovery phrase you will be unable to restore access to your wallet.
 
    Otherwise, if you do have an Insolar Wallet, initialize your device with the existing backup phrase:
 
@@ -245,7 +245,7 @@ You can transfer your released XNS from deposit to your main account to perform 
 
 #. In the dashboard of the device, the Insolar application prompts you to verify the transfer details and sign the :guilabel:`Transfer` command. Click the :guilabel:`right` button to cycle through the details.
 
-#. Press both the :guilabel:`left` and :guilabel:`right` to open the signing options and press both :guilabel:`left` and :guilabel:`right` buttons again to sign the command.
+#. Press both the :guilabel:`left` and :guilabel:`right` buttons to open the signing options and press both :guilabel:`left` and :guilabel:`right` buttons again to sign the command.
 
    .. image:: imgs/mig-test/ledger-s-create-account-sign.png
       :width: 300px
