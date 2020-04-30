@@ -111,8 +111,8 @@ In the MainNet.
 
 .. rst-class:: column column2
 
-:ref:`Store XNS in a hardware wallet <ledger-nano>`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:ref:`Store XNS in your hardware wallet <ledger-nano>`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Manage your XNS via Ledger Nano S or X.
 
