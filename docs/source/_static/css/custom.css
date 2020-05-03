@@ -2,7 +2,9 @@
 
 .rst-content .section .admonition p:last-child { margin-bottom: 0 !important }
 
-.rst-content .section ol li a img { margin-bottom: 20px !important }
+.rst-content .section ol li a img { margin-bottom: 20px }
+
+.rst-content .section ol li p a img { margin-bottom: 0px !important }
 
 @font-face {
     font-family: 'montserratregular';
