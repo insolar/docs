@@ -27,7 +27,7 @@ To use the Insolar application on your Ledger Nano S or X hardware wallet, make 
    Otherwise, if you do have an Insolar Wallet, initialize your device with the existing backup phrase:
 
    #. Follow the official instructions for `Nano S <https://support.ledger.com/hc/en-us/articles/360005434914>`_ or `Nano X <https://support.ledger.com/hc/en-us/articles/360015132494>`_ to initialize the wallet with the phrase.
-   #. At **step 3** of the official instruction, choose the 18-word length and enter your Insolar Wallet's backup phrase.
+   #. At **step 3** of the official instruction, choose the 18-word phrase length and enter your Insolar Wallet's backup phrase.
 
    .. note:: You can initialize only a new, "clean" Ledger Nano device with the Insolar backup phrase. A device can only have one phrase. Devices that already store other crypto assets are "occupied" with other phrases.
    
@@ -224,7 +224,7 @@ Once you send XNS, the balance in the :guilabel:`Dashboard` tab decreases.
 Transfer swapped XNS from deposit to your main account
 ------------------------------------------------------
 
-Once you've :ref:`swapped your INS into XNS <swap>` your XNS are stored in your Insolar Wallet on a deposit account. Each swap operation creates a separate deposit account that goes from the status :guilabel:`ON HOLD` to :guilabel:`RELEASED` upon a successful swap.
+Once you've :ref:`swapped your INS into XNS <swap>`, your XNS are stored in your Insolar Wallet on a deposit account. Each swap operation creates a separate deposit account that goes from the status :guilabel:`ON HOLD` to :guilabel:`RELEASED` upon a successful swap.
 
 You can transfer your released XNS from deposit to your main account to perform further operations with them. 
 
