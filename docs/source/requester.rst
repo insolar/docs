@@ -126,11 +126,7 @@ Step 1: Prepare
 
 .. content-tabs:: right-col
 
-   To build the requester, install, import, and set up the following:
-
-   #. Set up your development environment if you don't have one.
-
-   #. Install the `Go programming tools <https://golang.org/doc/install>`_. With the tools, you don't need to “reinvent the wheel”.
+   To start building the requester:
 
    #. Create a ``Main.go`` file.
 
@@ -144,6 +140,7 @@ Step 1: Prepare
 
    .. code-block:: Go
       :linenos:
+      :lineno-start: 32
 
       // Declare a structure to contain the ECDSA signature:
       type ecdsaSignature struct {
@@ -202,6 +199,7 @@ Step 2: Declare request structures
 
    .. code-block:: Go
       :linenos:
+      :lineno-start: 63
 
       // Continue in the Main.go file...
 
@@ -277,6 +275,7 @@ Step 3: Create a seed getter
 
    .. code-block:: Go
       :linenos:
+      :lineno-start: 107
 
       // Continue in the Main.go file...
 
@@ -370,6 +369,7 @@ Step 4: Create a sender function
 
    .. code-block:: Go
       :linenos:
+      :lineno-start: 166
 
       // Continue in the Main.go file...
 
@@ -485,6 +485,7 @@ Step 5: Generate a key pair
 
    .. code-block:: Go
       :linenos:
+      :lineno-start: 248
 
       // Continue in the Main.go file...
 
@@ -554,6 +555,7 @@ Step 6: Form and send a member creation request
 
    .. code-block:: Go
       :linenos:
+      :lineno-start: 287
 
       // Continue in the main() function...
 
@@ -615,6 +617,7 @@ Step 7: Form and send a transfer request
 
    .. code-block:: Go
       :linenos:
+      :lineno-start: 317
       :emphasize-lines: 15
 
       // Continue in the main() function...
