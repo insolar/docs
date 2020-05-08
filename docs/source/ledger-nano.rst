@@ -53,8 +53,7 @@ Initialize your device with the existing backup phrase:
 
    * In addition to the "migrated" wallet, you can create new Insolar Wallets and store their private keys in the device under different numbers, for example, ``1``, ``2``, etc.
 
-Next
-~~~~
+**Next**
 
 Install the latest firmware on your `Nano S <https://support.ledger.com/hc/en-us/articles/360002731113-Update-Ledger-Nano-S-firmware>`_ or `Nano X <https://support.ledger.com/hc/en-us/articles/360013349800>`_.
 
