@@ -127,7 +127,7 @@ Manage your XNS via Ledger Nano S or X.
 
 .. toctree::
    :hidden:
-   :caption: Exchange & wallet developers
+   :caption: Exchange developers
 
    use-cases
    requester
