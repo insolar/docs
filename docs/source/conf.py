@@ -52,6 +52,10 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
+# Sphinx uses html_extra_path option to add static files to the output (like
+# robots.txt file).
+# https://docs.readthedocs.io/en/stable/faq.html#how-can-i-avoid-search-results-having-a-deprecated-version-of-my-docs
+html_extra_path = ['_public']
 
 # -- Options for HTML output -------------------------------------------------
 
