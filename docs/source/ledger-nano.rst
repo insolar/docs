@@ -20,42 +20,40 @@ To use the Insolar application on your Ledger Nano S or X hardware wallet, make 
 #. `Install the Ledger Live application <https://support.ledger.com/hc/en-us/articles/360006395553/>`_. It allows you to manage applications on your device.
 #. **Initialize your Ledger Nano** in one of two ways depending on if you already have an Insolar Wallet or not.
 
-.. _no-wallet:
+   .. tabs::
 
-If you don't yet have an Insolar Wallet
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      .. tab:: If you don't yet have an Insolar Wallet
 
-Set up your `Nano S <https://support.ledger.com/hc/en-us/articles/360000613793>`_ or `Nano X <https://support.ledger.com/hc/en-us/articles/360018784134>`_ as described in the official Ledger documentation (click the links).
+         .. _no-wallet:
 
-.. caution::
+         Set up your `Nano S <https://support.ledger.com/hc/en-us/articles/360000613793>`_ or `Nano X <https://support.ledger.com/hc/en-us/articles/360018784134>`_ as described in the official Ledger documentation (click the links).
 
-   During the setup, you are required to choose a PIN and write down the recovery phrase for the device. Without the PIN you won't be able to unlock the device and without the recovery phrase you will be unable to restore access to your wallet.
+         .. caution::
 
-.. tip::
+            During the setup, you are required to choose a PIN and write down the recovery phrase for the device. Without the PIN you won't be able to unlock the device and without the recovery phrase you will be unable to restore access to your wallet.
 
-   You can hold several private keys for several Insolar Wallets on your Ledger Nano. Every key stored in the device has a number. By default, the number of the first key is ``0``.
+         .. tip::
 
-.. _have-wallet:
+            You can hold several private keys for several Insolar Wallets on your Ledger Nano. Every key stored in the device has a number. By default, the number of the first key is ``0``.
 
-If you do have an Insolar Wallet
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      .. tab:: If you do have an Insolar Wallet
 
-Initialize your device with the existing backup phrase:
+         .. _have-wallet:
 
-#. Follow the official instructions for `Nano S <https://support.ledger.com/hc/en-us/articles/360005434914>`_ or `Nano X <https://support.ledger.com/hc/en-us/articles/360015132494>`_ to initialize the wallet with the phrase.
-#. At **step 3** of the official instruction, choose the 18-word phrase length and enter your Insolar Wallet's backup phrase.
+         Initialize your device with the existing backup phrase:
 
-.. tip::
+         #. Follow the official instructions for `Nano S <https://support.ledger.com/hc/en-us/articles/360005434914>`_ or `Nano X <https://support.ledger.com/hc/en-us/articles/360015132494>`_ to initialize the wallet with the phrase.
+         #. At **step 3** of the official instruction, choose the 18-word phrase length and enter your Insolar Wallet's backup phrase.
 
-   * You can initialize only a new, "clean" Ledger Nano device with the Insolar backup phrase. A device can only have one phrase. Devices that already store other crypto assets are "occupied" with other phrases.
+         .. tip::
 
-   * You can "migrate" only one existing Insolar Wallet to a clean device. Every private key stored in the device has a number. The number of "migrated" private key is ``0``.
+            * You can initialize only a new, "clean" Ledger Nano device with the Insolar backup phrase. A device can only have one phrase. Devices that already store other crypto assets are "occupied" with other phrases.
 
-   * In addition to the "migrated" wallet, you can create new Insolar Wallets and store their private keys in the device under different numbers, for example, ``1``, ``2``, etc.
+            * You can "migrate" only one existing Insolar Wallet to a clean device. Every private key stored in the device has a number. The number of "migrated" private key is ``0``.
 
-**Next**
+            * In addition to the "migrated" wallet, you can create new Insolar Wallets and store their private keys in the device under different numbers, for example, ``1``, ``2``, etc.
 
-Install the latest firmware on your `Nano S <https://support.ledger.com/hc/en-us/articles/360002731113-Update-Ledger-Nano-S-firmware>`_ or `Nano X <https://support.ledger.com/hc/en-us/articles/360013349800>`_.
+#. Next, install the latest firmware on your `Nano S <https://support.ledger.com/hc/en-us/articles/360002731113-Update-Ledger-Nano-S-firmware>`_ or `Nano X <https://support.ledger.com/hc/en-us/articles/360013349800>`_.
 
 Then proceed to installing the Insolar application on your device.
 
@@ -95,7 +93,15 @@ To install the Insolar application on Ledger Nano:
 
 #. Once found, press both the :guilabel:`left` and :guilabel:`right` buttons simultaneously to launch the application.
 
-#. The application may notify you that it's pending the Ledger review. This is temporary. Press both the :guilabel:`left` and :guilabel:`right` buttons again.
+#. The application may notify you that it's pending the Ledger review. This is temporary.
+
+   .. caution:: Wait for a couple of seconds before pressing any buttons.
+
+      If you press both buttons too early (approximately within 300 milliseconds), your Ledger device may "freeze" on the :guilabel:`Pending Ledger review` screen due to a known bug that will be fixed soon.
+
+      If this happens, reboot the device by unplugging it from the USB port. In case your device is the Nano X, the only way to reboot the device is wait for its battery to run out.
+
+   Then, short-press both the :guilabel:`left` and :guilabel:`right` buttons again. A "short-press" should not last longer than 100 milliseconds.
 
 Once the Insolar application is launched, proceed to creating an Insolar Wallet if you don't have one. Otherwise, :ref:`log in to your wallet <log-in-nano>`.
 
