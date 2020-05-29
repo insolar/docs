@@ -7,7 +7,7 @@ Manage XNS via your Ledger Nano hardware wallet
 
 A hardware wallet is a separate device that stores the private keys for your crypto assets. The keys never leave the device and remain secure even if the device is connected to a compromised computer.
 
-The Insolar application for Ledger Nano S and X keeps your Insolar private key on the device and lets you manage XNS coins via the `Insolar Wallet <https://wallet.insolar.io>`_.
+The Insolar application for Ledger Nano S and X keeps your Insolar private key on the device and lets you manage XNS coins via `Insolar Wallet <https://wallet.insolar.io>`_.
 
 The application is developed by the Insolar team. To request technical support, send an email to support@insolar.io.
 
@@ -16,9 +16,9 @@ Set up your Ledger Nano
 
 To use the Insolar application on your Ledger Nano S or X hardware wallet, make sure you install and set up the following:
 
-#. `Install Google Chrome <https://www.google.com/chrome/>`_. It's the only supported browser for now.
+#. `Install Google Chrome <https://www.google.com/chrome/>`_. For the moment, it's the only supported browser.
 #. `Install the Ledger Live application <https://support.ledger.com/hc/en-us/articles/360006395553/>`_. It allows you to manage applications on your device.
-#. **Initialize your Ledger Nano** in one of two ways depending on if you already have an Insolar Wallet or not.
+#. **Initialize your Ledger Nano** in one of two ways depending on whether or not you already have an Insolar Wallet.
 
 .. _no-wallet:
 
@@ -29,29 +29,29 @@ Set up your `Nano S <https://support.ledger.com/hc/en-us/articles/360000613793>`
 
 .. caution::
 
-   During the setup, you are required to choose a PIN and write down the recovery phrase for the device. Without the PIN you won't be able to unlock the device and without the recovery phrase you will be unable to restore access to your wallet.
+   During the setup, you are required to choose a PIN and write down the recovery phrase for the device. Without the PIN you won't be able to unlock the device and without the recovery phrase you won't be unable to restore access to your wallet.
 
 .. tip::
 
-   You can hold several private keys for several Insolar Wallets on your Ledger Nano. Every key stored in the device has a number. By default, the number of the first key is ``0``.
+   You can hold several private keys for several Insolar Wallets on your Ledger Nano. Every key stored on the device has a number. By default, the number of the first key is ``0``.
 
 .. _have-wallet:
 
 If you do have an Insolar Wallet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Initialize your device with the existing backup phrase:
+Initialize your device with the existing secret backup phrase:
 
 #. Follow the official instructions for `Nano S <https://support.ledger.com/hc/en-us/articles/360005434914>`_ or `Nano X <https://support.ledger.com/hc/en-us/articles/360015132494>`_ to initialize the wallet with the phrase.
-#. At **step 3** of the official instruction, choose the 18-word phrase length and enter your Insolar Wallet's backup phrase.
+#. At **step 3** of the official instruction, choose the 18-word phrase length and enter your Insolar Wallet's secret backup phrase.
 
 .. tip::
 
-   * You can initialize only a new, "clean" Ledger Nano device with the Insolar backup phrase. A device can only have one phrase. Devices that already store other crypto assets are "occupied" with other phrases.
+   * You can initialize only a new, "clean" Ledger Nano device with the Insolar secret backup phrase. A device can only have one phrase. Devices that already store other crypto assets are "occupied" with other phrases.
 
-   * You can "migrate" only one existing Insolar Wallet to a clean device. Every private key stored in the device has a number. The number of "migrated" private key is ``0``.
+   * You can "migrate" only one existing Insolar Wallet to a clean device. Every private key stored on the device has a number. The number of the "migrated" wallet's private key is ``0``.
 
-   * In addition to the "migrated" wallet, you can create new Insolar Wallets and store their private keys in the device under different numbers, for example, ``1``, ``2``, etc.
+   * In addition to the "migrated" wallet, you can create new Insolar Wallets and store their private keys on the device under different numbers, for example, ``1``, ``2``, etc.
 
 **Next**
 
@@ -79,6 +79,10 @@ To install the Insolar application on Ledger Nano:
    .. image:: imgs/nano/ledger-live-connect.png
       :width: 600px
 
+   .. caution::
+
+      If you're using Ledger Nano S, make sure your Micro-USB cable supports both charging and data transfer. If it's a charge-only cable, you won't be able to complete this guide.
+
 #. If prompted, press both the :guilabel:`left` and :guilabel:`right` buttons simultaneously on the device to allow the manager connection.
 
    .. image:: imgs/nano/allow-ledger-live.png
@@ -86,12 +90,12 @@ To install the Insolar application on Ledger Nano:
 
 #. Find :guilabel:`Insolar` in the application catalog and click :guilabel:`Install` next to it.
 
-   This displays the installation window with a progress bar. Wait for the installation to complete.
+   This displays an installation window with a progress bar. Wait for the installation to complete.
 
    .. image:: imgs/nano/install-insolar-app.png
       :width: 600px
 
-#. In the dashboard of the Ledger Nano device, press the :guilabel:`left` or :guilabel:`right` button to find the Insolar application.
+#. On the dashboard of the Ledger Nano device, press the :guilabel:`left` or :guilabel:`right` button to find the Insolar application.
 
 #. Once found, press both the :guilabel:`left` and :guilabel:`right` buttons simultaneously to launch the application.
 
@@ -104,12 +108,12 @@ Create a connected Insolar Wallet
 
 To create an Insolar Wallet using the Insolar application on Ledger Nano, complete the following steps:
 
-#. In Google Chrome, open the `Insolar Wallet <https://wallet.insolar.io>`_ and click :guilabel:`CREATE A NEW WALLET`.
+#. In Google Chrome, open the `Insolar Wallet <https://wallet.insolar.io>`_ website and click :guilabel:`CREATE A NEW WALLET`.
 
    .. image:: imgs/nano/create-ins-wlt.png
       :width: 400px
 
-#. On the **Create a new Wallet** screen, click :guilabel:`USE LEDGER NANO`.
+#. On the **Create a new wallet** screen, click :guilabel:`USE LEDGER NANO`.
 
    .. image:: imgs/nano/use-ledger-n.png
       :width: 400px
@@ -118,7 +122,7 @@ To create an Insolar Wallet using the Insolar application on Ledger Nano, comple
 
    .. _enter_key_number:
 
-#. If required, enter the key number. You can hold several private keys for several Insolar Wallets on your Ledger Nano. Every key stored in the device has a number. By default, the number of the first key is ``0``.
+#. If required, enter the key number. You can hold several private keys for several Insolar Wallets on your Ledger Nano. Every key stored on the device has a number. By default, the number of the first key is ``0``.
 
    .. important:: Remember the number of this private key. You are required to specify it upon every login to use a particular Insolar Wallet.
 
@@ -135,7 +139,7 @@ To create an Insolar Wallet using the Insolar application on Ledger Nano, comple
    .. image:: imgs/nano/select-n.png
       :width: 400px
 
-#. In the dashboard of the Ledger Nano device, the Insolar application prompts you to confirm the :guilabel:`Create Account` command.
+#. On the dashboard of your Ledger Nano, the Insolar application prompts you to confirm the :guilabel:`Create Account` command.
    
    .. image:: imgs/nano/ledger-s-create-account.png
       :width: 300px
@@ -147,19 +151,19 @@ To create an Insolar Wallet using the Insolar application on Ledger Nano, comple
    .. image:: imgs/nano/ledger-s-create-account-sign.png
       :width: 300px
 
-   This securely stores the private key on the device.
+   This securely stores the private key on your Ledger Nano.
 
 #. Once signed, the Insolar Wallet displays a wallet validation window.
 
    .. image:: imgs/mig-test/one-more-thing.png
       :width: 400px
 
-#. Wait for the validation to complete and see the congratulations message.
+#. Wait for the validation to complete and see the congratulation message.
 
    .. image:: imgs/nano/ledger-n-congrats.png
       :width: 400px
 
-Once the Wallet is created, you can manage your XNS with it. Every login and XNS transfer operation requires the associated private key stored on the Ledger Nano, so the device must be connected to confirm these actions.
+Once the wallet is created, you can manage your XNS with it. Every login and XNS transfer operation requires the associated private key stored on the Ledger Nano, so the device must be connected to confirm these actions.
 
 .. _log-in-nano:
 
@@ -187,18 +191,13 @@ Receive XNS
 
 To receive XNS, do the following:
 
-#. Open the dashboard of the Insolar Wallet and click the avatar icon the in upper-right corner.
+#. On the dashboard of your wallet, click the copy button below :guilabel:`XNS account`. This copies your XNS account address to the clipboard.
 
-   .. image:: imgs/nano/click-avatar.png
-      :width: 250px
-
-#. In the **Your Wallet** panel, click :guilabel:`Copy XNS address`. This copies the address to the clipboard.
-
-   .. image:: imgs/nano/copy-xns-address.png
+   .. image:: imgs/nano/copy-xns-account-address.png
       :width: 200px
 
 #. Reveal the address to anyone who wishes to transfer XNS to you and wait for the incoming transaction.
-#. View the incoming transactions: in the **Your Wallet** panel, click :guilabel:`Transaction history`.
+#. View the incoming transactions: in the navigation panel, click :guilabel:`History`.
 
    .. image:: imgs/nano/click-history.png
       :width: 200px
@@ -231,7 +230,7 @@ To send XNS, do the following:
    * recipient address,
    * amount of XNS to send,
    * transaction fee,
-   * total amount — including the fee.
+   * total amount—including the fee.
 
    .. image:: imgs/nano/check-details.png
       :width: 400px
@@ -245,7 +244,7 @@ To send XNS, do the following:
    .. image:: imgs/nano/ledger-s-create-account-sign.png
       :width: 300px
 
-#. View the outgoing transactions: in the **Your Wallet** panel, click :guilabel:`Transaction history`.
+#. View the outgoing transactions: in the navigation panel, click :guilabel:`History`.
 
    .. image:: imgs/nano/click-history.png
       :width: 200px

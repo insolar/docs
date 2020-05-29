@@ -7,10 +7,10 @@ Explore use cases
 In short, to integrate with Insolar MainNet, do the following:
 
 #. Create an Insolar wallet to keep the users' XNS coins. See the use cases: :ref:`Create a Wallet <create_wallet>` and :ref:`Get the Wallet's Balance <get_balance>`.
-#. Let the users deposit XNS coins to your wallet — provide them with the wallet address. See the use cases: :ref:`Deposit Funds to Exchange <deposit_funds_to_ex>` and :ref:`Deposit Coins to Exchange <deposit_coins_to_ex>`.
-#. Let the users withdraw XNS coins. They must create their own wallets in the MainNet and provide you with their addresses. See the use cases: :ref:`Create a Wallet <create_wallet>` and :ref:`Withdraw Coins from Exchange <withdraw_coins_from_ex>`.
-#. Transfer XNS coins between wallets in the MainNet. See the use case: :ref:`Transfer Coins <transfer_coins>`.
-#. Get information on transactions in the MainNet. See the corresponding `API request <https://apidocs.insolar.io/observer/latest/#operation/transactions-search>`_.
+#. Let the users deposit XNS coins to your wallet—provide them with the wallet address. See the use cases: :ref:`Deposit Funds to Exchange <deposit_funds_to_ex>` and :ref:`Deposit Coins to Exchange <deposit_coins_to_ex>`.
+#. Let the users withdraw XNS coins. They must create their own wallets on the MainNet and provide you with addresses of these wallets. See the use cases: :ref:`Create a Wallet <create_wallet>` and :ref:`Withdraw Coins from Exchange <withdraw_coins_from_ex>`.
+#. Transfer XNS coins between wallets on the MainNet. See the use case: :ref:`Transfer Coins <transfer_coins>`.
+#. Get information on transactions on the MainNet. See the corresponding `API request <https://apidocs.insolar.io/observer/latest/#operation/transactions-search>`_.
 
 To invoke APIs correctly, familiarize yourself with:
 
@@ -74,11 +74,11 @@ Use case: Create a wallet
 
 To create a wallet:
 
-#. Generate a key pair.
+#. Generate a private/public key pair.
 #. Invoke Insolar's API:
 
    #. Provide the public key.
-   #. Receive a reference to the new member — address in the Insolar network.
+   #. Receive a reference to the new member—address on the Insolar network.
 
 The wallet creation sequence is as follows:
 
@@ -95,16 +95,16 @@ The wallet creation sequence is as follows:
    entity "Insolar" as Ins
 
    activate U
-   U -> U : generate new key pair\n\t(<b>publicKey</b> used later\n\tto create & identify Insolar user)
+   U -> U : generate new private/public key pair\n\t(<b>publicKey</b> used later\n\tto create & identify Insolar user)
 
    U -> RPC : RPC API POST\n\tnode.getSeed()
    activate RPC
    return <b>seed</b>
    U -> RPC : RPC API POST\n\tmember.create(\n\t\tsignature,\n\t\t<b>seed</b>,\n\t\t<b>publicKey</b>\n\t)
    activate RPC
-   RPC -> Ins : invokes the MainNet
+   RPC -> Ins : invoke the MainNet
    activate Ins
-   Ins -> Ins : creates\n\tnew user & wallet
+   Ins -> Ins : create new \n\tuser & wallet
    return
    return <b>memberReference</b>\n\t(used later to identify\n\tInsolar member & wallet)
    deactivate U
@@ -118,13 +118,13 @@ API requests used:
 
 .. _get_balance:
 
-Use case: Get the wallet's balance
+Use case: Get the wallet balance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To view the balance, a user (exchange or any other user) can either:
+To view the balance, a user (exchange service or any other user) can either:
 
-* Use the Insolar's Web Wallet.
-* Or invoke the API using the Insolar's credentials (``memberReference`` or ``publicKey``).
+* Use their Insolar Wallet.
+* Or invoke the API using their Insolar's credentials (``memberReference`` or ``publicKey``).
 
 The viewing sequence is as follows:
 
@@ -149,7 +149,7 @@ The viewing sequence is as follows:
    activate RPC
    RPC -> Ins
    activate Ins
-   Ins -> Ins : identifies a user
+   Ins -> Ins : identify the user
    return
    return memberReference
 
@@ -189,13 +189,13 @@ Use case: Transfer coins
 
 To transfer XNS coins to another user, a user (exchange or any other) can either:
 
-* Use the Insolar's Web Wallet.
+* Use their Insolar Wallet.
 * Or invoke the API.
 
 To transfer coins via API, provide:
 
-#. The sender's ``memberReference``, so Insolar can identify the sender.
-#. ``toMemberReference``, the reference of the recipient.
+#. Sender's ``memberReference``, so Insolar can identify the sender.
+#. ``toMemberReference``—recipient's reference.
 #. An ``amount`` of XNS coins to transfer.
 
 .. note:: To retrieve the ``memberReference``, invoke the relevant API and provide a public key.
@@ -222,7 +222,7 @@ The transfer sequence is as follows:
    activate RPC
    RPC -> Ins
    activate Ins
-   Ins -> Ins : identifies a user
+   Ins -> Ins : identify the user
    return
    return memberReference
 
@@ -234,7 +234,7 @@ The transfer sequence is as follows:
    activate RPC
    RPC -> Ins
    activate Ins
-   Ins -> Ins : performs transfer
+   Ins -> Ins : perform transfer
    return
    return {\n\tfee,\t// transfer's fee value\n\trequestReference\n}
 
@@ -248,38 +248,38 @@ API requests used:
 
 .. _deposit_funds_to_ex:
 
-Use case: Deposit funds to exchange
+Use case: Deposit funds to an exchange
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When a user deposits funds to the exchange and immediately converts them to XNS, an accompanying transfer between wallets should be performed.
 
-This case is analogous to :ref:`coin transfer <transfer_coins>`, where:
+This case is similar to :ref:`coin transfer <transfer_coins>`, where:
 
-* ``memberReference`` is the reference to a user from whose wallet the coins are withdrawn.
+* ``memberReference`` is the reference to the owner of the wallet the coins are withdrawn from.
 * ``toMemberReference`` is the reference to the exchange's wallet.
 
 .. _deposit_coins_to_ex:
 
-Use case: Deposit coins to exchange
+Use case: Deposit coins to an exchange
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When a user deposits XNS coins to the exchange, an accompanying transfer between wallets should be performed.
 
-This case is analogous to :ref:`coin transfer <transfer_coins>`, where:
+This case is similar to :ref:`coin transfer <transfer_coins>`, where:
 
-* ``memberReference`` is the reference to a user from whose wallet the coins are withdrawn.
+* ``memberReference`` is the reference to the owner of the wallet the coins are withdrawn from.
 * ``toMemberReference`` is the reference to the exchange's wallet.
 
 .. _withdraw_coins_from_ex:
 
-Use case: Withdraw coins from exchange
+Use case: Withdraw coins from an exchange
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Prerequisite: the recipient must have an Insolar's wallet created as described in :ref:`wallet creation <create_wallet>`.
 
-This case is analogous to :ref:`coin transfer <transfer_coins>`, where:
+This case is similar to :ref:`coin transfer <transfer_coins>`, where:
 
-* ``memberReference`` is the reference to a user from whose wallet the coins are withdrawn.
+* ``memberReference`` is the reference to the owner of the wallet the coins are withdrawn from.
 
   .. note:: This can be either a wallet opened by the exchange for the user, or the exchange's wallet.
 
