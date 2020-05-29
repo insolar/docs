@@ -52,6 +52,8 @@ b, strong {
     font-size: 90%;
 }
 
+.ui.menu { font-family: "montserratmedium", sans-serif }
+
 body {
     font-family: "montserratregular", sans-serif
 } 
