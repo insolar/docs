@@ -273,7 +273,7 @@ To migrate the test INS tokens and swap them to XNS coins:
    .. image:: imgs/mig-test/wlt-test-open-swap-tab.png
       :width: 600px
 
-   In the menu, click :guilabel:`Copy migration address`.
+   On the :guilabel:`SWAP` tab, click :guilabel:`Copy migration address`.
 
    After that, return to the MetaMask wallet.
 
