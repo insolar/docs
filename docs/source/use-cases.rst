@@ -119,7 +119,7 @@ API requests used:
 .. _get_balance:
 
 Use case: Get the wallet balance
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To view the balance, a user (exchange service or any other user) can either:
 
@@ -249,7 +249,7 @@ API requests used:
 .. _deposit_funds_to_ex:
 
 Use case: Deposit funds to an exchange
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When a user deposits funds to the exchange and immediately converts them to XNS, an accompanying transfer between wallets should be performed.
 
@@ -261,7 +261,7 @@ This case is similar to :ref:`coin transfer <transfer_coins>`, where:
 .. _deposit_coins_to_ex:
 
 Use case: Deposit coins to an exchange
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When a user deposits XNS coins to the exchange, an accompanying transfer between wallets should be performed.
 
@@ -273,7 +273,7 @@ This case is similar to :ref:`coin transfer <transfer_coins>`, where:
 .. _withdraw_coins_from_ex:
 
 Use case: Withdraw coins from an exchange
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Prerequisite: the recipient must have an Insolar's wallet created as described in :ref:`wallet creation <create_wallet>`.
 
