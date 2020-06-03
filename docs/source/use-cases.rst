@@ -123,7 +123,7 @@ Use case: Get the wallet balance
 
 To view the balance, a user (exchange service or any other user) can either:
 
-* Use their Insolar Wallet.
+* Use their Insolar Wallet web interface.
 * Or invoke the API using their Insolar's credentials (``memberReference`` or ``publicKey``).
 
 The viewing sequence is as follows:
