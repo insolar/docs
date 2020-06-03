@@ -79,7 +79,7 @@ To install the Insolar application on Ledger Nano:
 
    .. caution::
 
-      If you're using Ledger Nano S, make sure your Micro-USB cable supports both charging and data transfer. If it's a charge-only cable, you won't be able to complete this guide.
+      If it's a charge-only cable, your computer won't recognize the device and you won't be able to perform any action.
 
 #. If prompted, press both the :guilabel:`left` and :guilabel:`right` buttons simultaneously on the device to allow the manager connection.
 
