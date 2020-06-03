@@ -30,7 +30,7 @@ Test scenario overview
 
 To grasp what you will be doing, take a look at the steps of the test scenario:
 
-#. Create a MetaMask wallet and, inside of it, switch to Ropsten test network and add the INS custom token.
+#. Create a MetaMask wallet, switch to Ropsten test network inside it, and add the INS custom token.
 #. Get Ropsten test ETH coins.
 #. Swap the coins to test INS tokens using the INS token contract.
 #. Create a wallet in Insolar Wallet and, automatically, receive a migration address.
