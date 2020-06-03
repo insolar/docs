@@ -100,14 +100,14 @@ If you are a user, learn how to swap the token for the coin.
 :ref:`Test the swap <migration_test>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In the TestNet.
+On the TestNet.
 
 .. rst-class:: column column2
 
 :ref:`Perform the swap <swap>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In the MainNet.
+On the MainNet.
 
 .. rst-class:: column column2
 

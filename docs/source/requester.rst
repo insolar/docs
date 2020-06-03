@@ -11,7 +11,7 @@ This tutorial walks you through the process of creating a requester to Insolar A
 What you will build
 -------------------
 
-You will build a program (requester) that creates a member in the Insolar network and, as a member, transfers funds from its account.
+You will build a program (requester) that creates a member on the Insolar network and, as a member, transfers funds from its account.
 
 The requester forms and sends the following requests to the Insolar’s JSON RPC 2.0 API endpoint and receives the corresponding responses:
 
@@ -22,7 +22,7 @@ The requester forms and sends the following requests to the Insolar’s JSON RPC
 #. Forms, signs, and sends a **transfer** request with another seed that sends an amount of Insolar coins (XNS):
 
    * From your member’s account given your reference received in the previous response.
-   * To another’s account given a reference to the existing recipient member.
+   * To another account given a reference to an existing recipient member.
 
 .. _what_you_will_need:
 
