@@ -85,9 +85,9 @@ To swap your INS tokens to XNS coins and simultaneously migrate them from the Et
 
    Later, you can log in using one of the following:
 
-   * (Recommended) Your password and the keystore file saved to your browser.
+   * (Recommended) Hardware wallet (such as Ledger Nano X or S).
    * Your password and the keystore file saved to your device.
-   * Hardware wallet (such as Ledger Nano X or S).
+   * Your password and the keystore file saved to your browser.
    * (Weakest safety level) Unencrypted private key.
 
    Either way, Insolar Wallet does not store your private key. Instead, it uses the private key provided every time to authorize login and operations. While logged in, you can copy your unencrypted private key, but keep in mind, this is its most vulnerable form.
