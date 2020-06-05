@@ -132,9 +132,9 @@ To build the requester, install, import, and set up the following:
         R, S *big.Int
       }
 
-      // Set the endpoint URL for the testing environment:
+      // Set the endpoint URL to that of TestNet:
       const (
-        TestNetURL = "https://wallet-api.test.insolar.io/api/rpc"
+        TestNetURL = "https://wallet-api.testnet.insolar.io/api/rpc"
       )
 
       // Create and initialize an HTTP client for connection re-use and put a cookiejar into it:
@@ -675,9 +675,9 @@ Below is the complete requester code example in Golang. Click **Show** to expand
         R, S *big.Int
       }
 
-      // Set the endpoint URL for the testing environment:
+      // Set the endpoint URL to that of TestNet:
       const (
-        TestNetURL = "https://wallet-api.test.insolar.io/api/rpc"
+        TestNetURL = "https://wallet-api.testnet.insolar.io/api/rpc"
       )
 
       // Create and initialize an HTTP client for connection re-use and put a cookiejar into it:
