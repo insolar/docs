@@ -47,7 +47,7 @@ To achieve scalability and transparency from the ground up, Insolar introduces s
 Centralization vs. decentralization
 -----------------------------------
 
-Broadly, existing blockchains and DLTs offer two major opposing approaches to processing data:
+All blockchains and DLTs fall into different areas on the spectrum between these two approaches:
 
 .. _two_approaches:
 
