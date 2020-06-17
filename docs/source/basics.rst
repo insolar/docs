@@ -54,7 +54,7 @@ Broadly, existing blockchains and DLTs offer two major opposing approaches to pr
 * **Approach 1**: Data is processed and recorded by "full" nodes (and/or "miners"). In this approach, a common ledger stores the said data and the ledger is maintained by all nodes. Decentralization here comes at the cost of low network throughput and high computation expenses.
 * **Approach 2**: Data is processed in a centralized way involving only a subset of nodes. This approach offers higher throughput rates but requires the network to transfer potentially large objects and raises questions regarding centralization.
 
-Insolar extends the latter approach by introducing the benefits of the former via its omni-scaling feature.
+Insolar takes its own approach to decentralization by introducing its omni-scaling feature.
 
 .. _omni_scaling:
 
