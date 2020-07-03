@@ -35,8 +35,8 @@ extensions = [
 #	'sphinxcontrib.golangdomain',
 	'sphinx_tabs.tabs',
 	'sphinxcontrib.plantuml',
-	'sphinx_copybutton',
-	'sphinxcontrib.contentui'
+	'sphinx_copybutton'
+#	'sphinxcontrib.contentui'
 ]
 
 plantuml_output_format = 'svg'
@@ -46,6 +46,9 @@ master_doc = 'index'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
+
+def setup(app):
+    app.add_css_file('custom.css')
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
