@@ -174,7 +174,8 @@ To build the requester, install, import, and set up the following:
 
       // Create a variable for the JSON RPC 2.0 request identifier:
       var id int = 1
-      // The identifier is to be incremented for every request and each corresponding response will contain it.
+      // The identifier is to be incremented for every request
+      // and each corresponding response will contain it.
 
 With that, everything your requester needs is set up.
 
@@ -739,10 +740,11 @@ Complete requester code examples
 
 Below are the complete requester code examples in Golang. Click **show/hide** to expand and click again to hide.
 
-.. toggle-header::
-   :header: API requester that creates a new member: **show/hide**
+.. container:: toggle
 
-   |
+   .. container:: header
+
+      API requester that creates a new member: **show/hide**
 
    .. attention:: In the highlighted line, replace the ``insolar:YYY...`` placeholder with a reference to the existing recipient member.
 
@@ -1081,12 +1083,11 @@ Below are the complete requester code examples in Golang. Click **show/hide** to
         fmt.Println("Fee is " + fee)
       }
 
-|
+.. container:: toggle
 
-.. toggle-header::
-   :header: API requester that uses an existing private key: **show/hide**
+   .. container:: header
 
-   |
+      API requester that uses an existing private key: **show/hide**
 
    .. attention:: 
 

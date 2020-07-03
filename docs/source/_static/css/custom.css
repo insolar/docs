@@ -10,6 +10,24 @@
 
 .rst-content .section ul:last-child { margin-bottom: 20px }
 
+.toggle .header {
+    display: block;
+    clear: both;
+    margin-bottom: 20px;
+}
+
+.toggle .header:after {
+    content: " ▶";
+}
+
+.toggle .header.open:after {
+    content: " ▼";
+}
+
+.wy-nav-content {
+    max-width: 1000px;
+}
+
 @font-face {
     font-family: 'montserratregular';
     src: url('https://docs.insolar.io/en/latest/_static/css/fonts/montserrat-regular-webfont.woff2') format('woff2'),

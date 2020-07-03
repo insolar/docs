@@ -28,7 +28,6 @@ Below is an illustration of the layered architecture that Insolar introduces to 
 
 .. figure:: imgs/layers.png
    :width: 900 px
-   :align: right
    :alt: Layers of the Insolar Blockchain
 
 The architecture is split into four layers:
