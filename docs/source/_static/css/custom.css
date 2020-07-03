@@ -6,6 +6,10 @@
 
 .rst-content .section ol li p a img { margin-bottom: 0px !important }
 
+.rst-content .section ul { margin-top: 20px }
+
+.rst-content .section ul:last-child { margin-bottom: 20px }
+
 @font-face {
     font-family: 'montserratregular';
     src: url('https://docs.insolar.io/en/latest/_static/css/fonts/montserrat-regular-webfont.woff2') format('woff2'),
@@ -44,7 +48,7 @@ b, strong {
 
 .rst-content code {
   font-family: "Source";
-  font-size: 100%;
+  font-size: 90%;
 }
 
 .rst-content div[class^='highlight'] pre {
