@@ -22,39 +22,38 @@ When automating complex business relations with counterparties and consumers, ev
 * Convincing the counterparties that they (the actor) should hold a centralized database and define the rules of processing.
 * Maintaining a centralized database and being responsible for all business processes and their automation.
 
-These pains go away with a blockchain or, more strictly, DLT: it effectively shifts those responsibilities from one single actor to a decentralized setup while ensuring the consistency and behavior of both the infrastructure and all actors involved, trusted or malicious. The problem with most DLTs is that they don't keep the needs of enterprises in mind from the very beginning. Conversely, Insolar's goal is to make blockchain easy-to-use for any enterprise, big or small.
+These pains go away with a blockchain or, more precisely, a DLT: it effectively shifts those responsibilities from one single actor to a decentralized setup while ensuring the consistency and behavior of both the infrastructure and all actors involved, trusted or malicious. The problem with most DLTs is that they don't keep the needs of enterprises in mind from the very beginning. Conversely, Insolar's goal is to make blockchain easy-to-use for any enterprise, big or small.
 
 Below is an illustration of the layered architecture that Insolar introduces to address this problem. Insolar is currently developing the proposed platform incrementally to allow it to progressively grow into the ultimate decentralized collaborative environment for various kinds of industries, companies, governments, and communities.
 
 .. figure:: imgs/layers.png
    :width: 900 px
-   :align: right
    :alt: Layers of the Insolar Blockchain
 
 The architecture is split into four layers:
 
 #. At the top layer are distributed business applications owned by and tailored for companies who serve other companies.
 #. The next layer represents business services and templates for business applications provided by vendors. Templates are the application building blocks.
-#. At the third layer are :ref:`clouds <fed_of_clouds>` and :ref:`domains <domains>`. Cloud infrastructure can be public and offered by governments or even communities as a public good — crowd-sourced computational resources. Domains serve as governance tools. Starting from this layer, the abstraction complexity grows progressively right up to the top layer.
+#. At the third layer are :ref:`clouds <fed_of_clouds>` and :ref:`domains <domains>`. Cloud infrastructure can be public and offered by governments or even communities as a public good—crowd-sourced computational resources. Domains serve as governance tools. Starting from this layer, the abstraction complexity grows progressively right up to the top layer.
 #. At the bottom layer are providers of :ref:`hardware capacities <globulas>` organized into national and/or industrial compute and storage resources.
 
 Insolar focuses its research and development in the three bottom layers making the top one easy to use for enterprises wishing to integrate with the Insolar blockchain.
 
-To achieve scalability and transparency from the ground up, Insolar introduces several design aspects to its bottom layer. To understand the aspects, let's dive in the complexities of decentralization.
+To achieve scalability and transparency from the ground up, Insolar introduces several design aspects to its bottom layer. To understand these aspects, let's dive into the complexities of decentralization.
 
 .. _centralization_vs_decentralization:
 
 Centralization vs. decentralization
 -----------------------------------
 
-Broadly, existing blockchains and DLTs offer two major opposing approaches to processing data:
+All blockchains and DLTs fall into different areas on the spectrum between these two approaches:
 
 .. _two_approaches:
 
 * **Approach 1**: Data is processed and recorded by "full" nodes (and/or "miners"). In this approach, a common ledger stores the said data and the ledger is maintained by all nodes. Decentralization here comes at the cost of low network throughput and high computation expenses.
 * **Approach 2**: Data is processed in a centralized way involving only a subset of nodes. This approach offers higher throughput rates but requires the network to transfer potentially large objects and raises questions regarding centralization.
 
-Insolar extends the latter approach by introducing the benefits of the former via its omni-scaling feature.
+Insolar takes its own approach to decentralization by introducing its omni-scaling feature.
 
 .. _omni_scaling:
 
@@ -111,7 +110,7 @@ To ease the burden of having to store large objects on-chain, Insolar:
 * Minimizes the number of nodes having to access such objects as described in the :ref:`processing section <processing>`.
 * Divides the nodes that carry the persistence layer into light and heavy material nodes, acting as hot and cold storage respectively.
 
-Light nodes are responsible for building blocks and connecting them into chains as well as forming units of :ref:`physical storage <ledger>` — :term:`jet drops <jet drop>`. :ref:`Light material nodes <light_material>` act effectively as a cache over a predefined (configurable) amount of processing cycles, while :ref:`heavy material nodes <heavy_material>` provide the long-term storage. This avoids tapping into the cold storage for frequently accessed objects. Only material nodes can access the stored data — virtual nodes have to request access from light nodes that serve as cache.
+Light nodes are responsible for building blocks and connecting them into chains as well as forming units of :ref:`physical storage <ledger>`—:term:`jet drops <jet drop>`. :ref:`Light material nodes <light_material>` act effectively as a cache over a predefined (configurable) amount of processing cycles, while :ref:`heavy material nodes <heavy_material>` provide the long-term storage. This avoids tapping into the cold storage for frequently accessed objects. Only material nodes can access the stored data—virtual nodes have to request access from light nodes that serve as cache.
 
 One would argue that to process an object, you must eventually bring it up from cold storage and this is expensive. Insolar, however, does it in a very limited number of cases and only from heavy to light material nodes. The nodes still need to pass the data, but only the ones that are directly involved in the processing of said data. The number of such nodes is configurable.
 
@@ -141,7 +140,7 @@ In addition to the :ref:`omni-scaling <omni_scaling>` bottom layer, Insolar intr
 Technically, a :term:`domain <domain>` is a special smart contract that defines a framework within which other smart contracts are executed. The framework can include a plethora of things: 
 
 * Business logic. For example, trade finance.
-* Access rules — permissioned or permissionless.
+* Access rules—permissioned or permissionless.
 * Location (for example, geographical) in which smart contracts can be executed and their results stored.
 * Validation consensus rules to configure processing costs (number of validation nodes and/or algorithms) versus value at risk.
 

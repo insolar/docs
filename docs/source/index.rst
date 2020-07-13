@@ -100,19 +100,19 @@ If you are a user, learn how to swap the token for the coin.
 :ref:`Test the swap <migration_test>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In the TestNet.
+On the TestNet.
 
 .. rst-class:: column column2
 
 :ref:`Perform the swap <swap>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In the MainNet.
+On the MainNet.
 
 .. rst-class:: column column2
 
-:ref:`Store XNS in a hardware wallet <ledger-nano>`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:ref:`Store XNS in your hardware wallet <ledger-nano>`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Manage your XNS via Ledger Nano S or X.
 
@@ -127,7 +127,7 @@ Manage your XNS via Ledger Nano S or X.
 
 .. toctree::
    :hidden:
-   :caption: Exchange & wallet developers
+   :caption: Exchange developers
 
    use-cases
    requester

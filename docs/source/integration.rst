@@ -14,7 +14,7 @@ To set up an Insolar network:
 Hardware requirements
 ---------------------
 
-The recommended setup for a proof-of-concept private Insolar network is to consist of **at least 5 nodes** that may be deployed both on virtual or physical servers in a data center.
+The recommended setup for a proof-of-concept private Insolar network should have **at least 5 nodes** that may be deployed both on virtual or physical servers in a data center.
 
 The minimal hardware requirements for all servers are as follows:
 
@@ -24,9 +24,9 @@ The minimal hardware requirements for all servers are as follows:
 | 4 cores (8 recommended) | 16 GB | 50 GB   | 1 Gbps            |
 +-------------------------+-------+---------+-------------------+
 
-.. note:: The storage capacity may need to be expanded depending on the size of the data to be stored.
+.. note:: Storage capacity may need to be expanded depending on the size of the data to be stored.
 
-Insolar runs on Linux, e.g., **CentOS**.
+Insolar runs on Linux. For example, **CentOS**.
 
 .. _ports_used:
 
@@ -59,7 +59,7 @@ Deploy network locally
 
 To set up the network locally, do the following:
 
-#. Since Insolar is written in Go, install the latest 1.12 version of the `Golang programming tools <https://golang.org/doc/install#install>`_.
+#. Since Insolar is written in Go, install v1.12 of the `Golang programming tools <https://golang.org/doc/install#install>`_.
 
    .. note:: Make sure the ``$GOPATH`` environment variable is set. 
 
@@ -67,19 +67,19 @@ To set up the network locally, do the following:
 
    .. code-block:: bash
 
-      go get github.com/insolar/insolar
+      go get github.com/insolar/mainnet
 
 #. Go to the package directory:
 
    .. code-block:: bash
 
-      cd $GOPATH/src/github.com/insolar/insolar
+      cd $GOPATH/src/github.com/insolar/mainnet
 
-#. Install dependencies and build binaries: simply run ``make``.
+#. Install dependencies and build binaries using the makefile that automates this process: run ``make``.
 
-#. Take a look at the ``scripts/insolard/bootstrap_template.yaml`` file. Here, you can find a list of nodes to be launched. In local setup, the "nodes" are simply services listening to different ports.
+#. Take a look at the ``scripts/insolard/bootstrap_template.yaml`` file. Here, you can find a list of nodes to be launched. In a local setup, the "nodes" are simply services listening to different ports.
 
-   To add more nodes to the "network", uncomment some.
+   You can vary the number of nodes on the "network" by commenting/uncommenting them.
 
 #. Run the launcher:
 
@@ -87,9 +87,9 @@ To set up the network locally, do the following:
 
       insolar-scripts/insolard/launchnet.sh -g
 
-   The launcher generates bootstrap data, starts the nodes and a pulse watcher, and logs events to ``.artifacts/launchnet/logs``.
+   The launcher generates the necessary bootstrap data, starts a pulse watcher, and launches a number of nodes. It also logs events to ``.artifacts/launchnet/logs`` in case you need to see them.
 
-When the pulse watcher says ``INSOLAR STATE: READY``, the network is up and has achieved consensus. You can start running test scripts and `benchmarks <https://github.com/insolar/insolar/blob/master/cmd/benchmark/README.md>`_.
+When the pulse watcher says ``INSOLAR STATE: READY``, the network is up and has achieved consensus. You can run a benchmark in another terminal tab/window ``bin/benchmark -c=4 -r=25 -k=.artifacts/launchnet/configs/``.
 
 .. _logs_and_monitor:
 
@@ -98,6 +98,6 @@ Logging and monitoring
 
 To manually bring up :ref:`logging and monitoring <logs_and_monitor>`, run ``insolar-scripts/monitor.sh``.
 
-To see the node’s logs, open Kibana in a web browser (``http://<your_server_IP>:5601/``) and click :guilabel:`Discover` in the menu.
+To see the node logs, open Kibana in a web browser (``http://<your_server_IP>:5601/``) and click :guilabel:`Discover` in the menu.
 
 To see the monitoring dashboard, open ``http://<your_server_IP>:3000/``, log in to Grafana (login: ``admin``, password: ``pass``), click :guilabel:`Home`, and open the :guilabel:`Insolar Dashboard`.

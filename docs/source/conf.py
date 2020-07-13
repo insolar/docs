@@ -35,8 +35,8 @@ extensions = [
 #	'sphinxcontrib.golangdomain',
 	'sphinx_tabs.tabs',
 	'sphinxcontrib.plantuml',
-	'sphinx_copybutton',
-	'sphinxcontrib.contentui'
+	'sphinx_copybutton'
+#	'sphinxcontrib.contentui'
 ]
 
 plantuml_output_format = 'svg'
@@ -47,11 +47,18 @@ master_doc = 'index'
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
+def setup(app):
+    app.add_css_file('custom.css')
+
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
+# Sphinx uses html_extra_path option to add static files to the output (like
+# robots.txt file).
+# https://docs.readthedocs.io/en/stable/faq.html#how-can-i-avoid-search-results-having-a-deprecated-version-of-my-docs
+html_extra_path = ['_public']
 
 # -- Options for HTML output -------------------------------------------------
 

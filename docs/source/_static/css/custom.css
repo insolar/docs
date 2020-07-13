@@ -1,8 +1,30 @@
-.rst-content .section ol li p:last-child, .rst-content .section ul li p:last-child { margin-bottom: 20px !important }
-
 .rst-content .section .admonition p:last-child { margin-bottom: 0 !important }
 
-.rst-content .section ol li a img { margin-bottom: 20px !important }
+.rst-content .section ol li a img { margin-bottom: 20px }
+
+.rst-content .section ol li p a img { margin-bottom: 0px !important }
+
+.rst-content .section ul { margin-top: 20px }
+
+.rst-content .section ul:last-child { margin-bottom: 20px }
+
+.toggle .header {
+    display: block;
+    clear: both;
+    margin-bottom: 20px;
+}
+
+.toggle .header:after {
+    content: " ▶";
+}
+
+.toggle .header.open:after {
+    content: " ▼";
+}
+
+.wy-nav-content {
+    max-width: 1000px;
+}
 
 @font-face {
     font-family: 'montserratregular';
@@ -42,13 +64,15 @@ b, strong {
 
 .rst-content code {
   font-family: "Source";
-  font-size: 100%;
+  font-size: 90%;
 }
 
 .rst-content div[class^='highlight'] pre {
     font-family: "Source";
     font-size: 90%;
 }
+
+.ui.menu { font-family: "montserratmedium", sans-serif }
 
 body {
     font-family: "montserratregular", sans-serif
