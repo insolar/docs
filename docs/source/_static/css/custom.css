@@ -70,11 +70,11 @@
 }
 
 b, strong {
-  font-family: 'montserratmedium'
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .btn  {
-  font-family: 'montserratmedium'
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .btn-link:visited {color: #9B59B6 !important }
@@ -89,40 +89,40 @@ b, strong {
     font-size: 90%;
 }
 
-.ui.menu { font-family: "montserratmedium", sans-serif }
+.ui.menu { font-family: 'IBM Plex Sans', sans-serif; }
 
 body {
-    font-family: "montserratregular", sans-serif
+    font-family: 'IBM Plex Sans', sans-serif;
 } 
 
 h1 {
-    font-family: "montserratmedium", sans-serif
+    font-family: 'IBM Plex Sans', sans-serif;
 } 
 
 h2 {
-    font-family: "montserratmedium", sans-serif
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 h3 {
-    font-family: "montserratmedium", sans-serif
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 h4 {
-    font-family: "montserratmedium", sans-serif
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 h5 {
-    font-family: "montserratmedium", sans-serif
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 h6 {
-    font-family: "montserratmedium", sans-serif
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 h7 {
-    font-family: "montserratmedium", sans-serif
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 h8 {
-    font-family: "montserratmedium", sans-serif
+    font-family: 'IBM Plex Sans', sans-serif;
 }

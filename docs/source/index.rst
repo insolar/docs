@@ -14,8 +14,7 @@ Developers: Start with a guide
 If you are a developer, explore Insolar technologies and run Insolar locally for testing purposes.
 
 .. panels::
-    :card: shadow
-    :body: text-center
+    :card: shadow text-center
 
     .. link-button:: basics
         :type: ref
@@ -54,8 +53,7 @@ Exchange and wallet developers: Integrate with Insolar
 If you are an exchange or you wish to implement your own wallet for Insolar MainNet, explore the API references and build an API requester.
 
 .. panels::
-    :card: shadow
-    :body: text-center
+    :card: shadow text-center
 
     .. link-button:: exchanges
         :type: ref
@@ -64,7 +62,7 @@ If you are an exchange or you wish to implement your own wallet for Insolar Main
 
     +++
 
-    Learn what APIs to invoke and in what sequences
+    Learn what API requests to invoke and in what sequences
 
     ---
 
@@ -103,8 +101,7 @@ Users: Swap INS to XNS
 If you are a user, learn how to swap the token for the coin.
 
 .. panels::
-    :card: shadow
-    :body: text-center
+    :card: shadow text-center
 
 
     .. link-button:: migration_test
@@ -125,7 +122,7 @@ If you are a user, learn how to swap the token for the coin.
 
     +++
 
-    On the MainNet, swap your INS tokens for XNS coins
+    On the MainNet, swap your INS tokens for XNS coins native to MainNet
 
     ---
 
