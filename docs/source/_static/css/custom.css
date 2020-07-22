@@ -1,3 +1,5 @@
+.p { line-height: 28px }
+
 .rst-content .section .admonition p:last-child { margin-bottom: 0 !important }
 
 .rst-content .section ol li a img { margin-bottom: 20px }
@@ -7,6 +9,17 @@
 .rst-content .section ul { margin-top: 20px }
 
 .rst-content .section ul:last-child { margin-bottom: 20px }
+
+.sphinx-tabs .container { 
+    width: initial;
+    margin-right: initial;
+    margin-left: initial;
+}
+
+.sphinx-tabs .sphinx-menu {
+    padding-left: initial;
+    padding-right: initial;
+}
 
 .toggle .header {
     display: block;
