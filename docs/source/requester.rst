@@ -738,13 +738,10 @@ Build upon it:
 Complete requester code examples
 --------------------------------
 
-Below are the complete requester code examples in Golang. Click **show/hide** to expand and click again to hide.
+Below are the complete requester code examples in Golang. Click the panels to expand and click again to hide.
 
-.. container:: toggle
-
-   .. container:: header
-
-      API requester that creates a new member: **show/hide**
+.. dropdown:: :fa:`eye,mr-1` API requester that creates a new member
+   :animate: fade-in
 
    .. attention:: In the highlighted line, replace the ``insolar:YYY...`` placeholder with a reference to the existing recipient member.
 
@@ -1083,11 +1080,8 @@ Below are the complete requester code examples in Golang. Click **show/hide** to
         fmt.Println("Fee is " + fee)
       }
 
-.. container:: toggle
-
-   .. container:: header
-
-      API requester that uses an existing private key: **show/hide**
+.. dropdown:: :fa:`eye,mr-1` API requester that uses an existing private key
+   :animate: fade-in
 
    .. attention:: 
 

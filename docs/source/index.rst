@@ -1,9 +1,6 @@
 .. Insolar documentation master file, created by
    sphinx-quickstart on Tue May 14 19:35:14 2019.
 
-.. raw:: html
-   :file: landing-page.html
-
 Insolar documentation
 =====================
 
@@ -16,105 +13,127 @@ Developers: Start with a guide
 
 If you are a developer, explore Insolar technologies and run Insolar locally for testing purposes.
 
-.. raw:: html
+.. panels::
+    :card: shadow text-center
 
-   <div class="reduced-width">
+    .. link-button:: basics
+        :type: ref
+        :text: Understand Insolar >
+        :classes: btn-link stretched-link font-weight-bold
 
-.. rst-class:: column column2
+    +++
 
-:ref:`Understand Insolar <basics>`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Take a look at the big picture
 
-Learn the basics.
+    ---
 
-.. rst-class:: column column2
+    .. link-button:: architecture
+        :type: ref
+        :text: Take a deep dive >
+        :classes: btn-link stretched-link font-weight-bold
 
-:ref:`Explore the architecture <architecture>`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    +++
 
-Take a deep dive.
+    Explore the intricacies of Insolar architecture
 
-.. rst-class:: column column2
+    ---
 
-:ref:`Set up Insolar network locally <integration>`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    .. link-button:: integration
+        :type: ref
+        :text: Start step-by-step >
+        :classes: btn-link stretched-link font-weight-bold
 
-Go through step-by-step instructions.
+    +++
 
-.. rst-class:: row
-
-.. rst-class:: reg-text
+    Set up an Insolar network locally
 
 Exchange and wallet developers: Integrate with Insolar
--------------------------------------------------------
+------------------------------------------------------
 
 If you are an exchange or you wish to implement your own wallet for Insolar MainNet, explore the API references and build an API requester.
 
-.. raw:: html
+.. panels::
+    :card: shadow text-center
 
-   <div class="reduced-width">
+    .. link-button:: exchanges
+        :type: ref
+        :text: Explore the use cases >
+        :classes: btn-link stretched-link font-weight-bold
 
-.. rst-class:: column column2
+    +++
 
-:ref:`Explore the use cases <exchanges>`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Learn what API requests to invoke and in what sequences
 
-Learn what APIs to invoke and in what sequences.
+    ---
 
-.. rst-class:: column column2
+    .. link-button:: building_requester
+        :type: ref
+        :text: Build an API requester >
+        :classes: btn-link stretched-link font-weight-bold
 
-:ref:`Build an API requester <building_requester>`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    +++
 
-Learn how to form and sign requests to MainNet API.
+    Learn how to form and sign requests to Insolar MainNet API
 
-.. rst-class:: column column2
+    ---
 
-`MainNet API <https://apidocs.insolar.io/platform/latest>`_
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    .. link-button:: https://apidocs.insolar.io/platform/latest
+        :text: Go to MainNet API
+        :classes: btn-outline-primary btn-block stretched-link
 
-API for creating members and transactions on the network.
+    +++
 
-.. rst-class:: column column2
+    Explore the MainNet API for creating members and transactions
 
-`MainNet read-only API <https://apidocs.insolar.io/observer/latest>`_
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ---
 
-Read-only API provided by an Observer service that pulls information from the network.
+    .. link-button:: https://apidocs.insolar.io/observer-services/v1
+        :text: Go to read-only MainNet API
+        :classes: btn-outline-primary btn-block stretched-link
 
-.. rst-class:: row
+    +++
 
-.. rst-class:: reg-text
+    Explore the read-only MainNet API provided by an Observer node
 
 Users: Swap INS to XNS
 ----------------------
 
 If you are a user, learn how to swap the token for the coin.
 
-.. raw:: html
+.. panels::
+    :card: shadow text-center
 
-   <div class="reduced-width">
 
-.. rst-class:: column column2
+    .. link-button:: migration_test
+        :type: ref
+        :text: Test the swap >
+        :classes: btn-link stretched-link font-weight-bold
+  
+    +++
 
-:ref:`Test the swap <migration_test>`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    On the TestNet, get test INS tokens and swap them for test XNS coins
 
-On the TestNet.
+    ---
 
-.. rst-class:: column column2
+    .. link-button:: swap
+        :type: ref
+        :text: Perform the swap >
+        :classes: btn-link stretched-link font-weight-bold
 
-:ref:`Perform the swap <swap>`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    +++
 
-On the MainNet.
+    On the MainNet, swap your INS tokens for XNS coins native to MainNet
 
-.. rst-class:: column column2
+    ---
 
-:ref:`Store XNS in your hardware wallet <ledger-nano>`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    .. link-button:: ledger-nano
+        :type: ref
+        :text: Use a hardware wallet >
+        :classes: btn-link stretched-link font-weight-bold
 
-Manage your XNS via Ledger Nano S or X.
+    +++
+
+    Store and manage XNS via Ledger Nano S or X
 
 .. toctree::
    :hidden:

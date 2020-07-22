@@ -35,7 +35,8 @@ extensions = [
 #	'sphinxcontrib.golangdomain',
 	'sphinx_tabs.tabs',
 	'sphinxcontrib.plantuml',
-	'sphinx_copybutton'
+	'sphinx_copybutton',
+    'sphinx_panels'
 #	'sphinxcontrib.contentui'
 ]
 
