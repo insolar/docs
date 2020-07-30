@@ -75,6 +75,7 @@ b, strong {
 
 .btn  {
     font-family: 'IBM Plex Sans', sans-serif;
+    padding: .375rem 0rem !important;
 }
 
 .btn-link:visited {color: #9B59B6 !important }

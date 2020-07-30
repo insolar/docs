@@ -79,6 +79,7 @@ html_static_path = ['_static']
 # or fully qualified paths (eg. https://...)
 html_css_files = [
     'css/custom.css',
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
 ]
 
 html_logo = 'imgs/Logo_DarkBG_Transparent.png'
