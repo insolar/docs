@@ -81,9 +81,9 @@ html_css_files = [
     'css/custom.css',
 ]
 
-html_logo = 'imgs/Logo_light.png'
+html_logo = 'imgs/Logo_DarkBG_Transparent.png'
 
-html_favicon = 'imgs/favicon.png'
+html_favicon = 'imgs/favicon2.png'
 
 html_theme_options = {
     'display_version': True,
