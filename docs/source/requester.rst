@@ -1,19 +1,19 @@
 .. _building_requester:
 
-===================
-Build API requester
-===================
+======================
+Build an API requester
+======================
 
 This tutorial walks you through the process of creating a *requester* to `Insolar MainNet API <https://apidocs.insolar.io/platform/latest>`_. You will learn how to **form and sign requests** that create a new member or use the existing one to transfer XNS to other members.
 
-.. note:: You can also use the `CLI tool <https://github.com/insolar/mainnet/tree/master/application/cmd/requester>`_ of the same name to access the MainNet API.
+.. note:: You can also use the `CLI tool <https://github.com/insolar/mainnet/tree/master/application/cmd/requester>`_ of the same name (requester) to access the MainNet API.
 
-Code examples in this tutorial are straightforward, statements are successive (without conditional expressions and cycles), and there are only 2 functions called by the main one. This lets you focus on the substance rather than code structure: how to use cryptographic functions provided by Golang packages to sign API requests correctly.
+Code examples in this tutorial are straightforward, statements are successive (without conditional expressions and cycles), and the main function calls only two additional ones. This lets you focus on the substance rather than code structure: how to use cryptographic functions provided by Golang packages to sign API requests correctly.
 
 You can learn to sign requests in 2 ways:
 
-* By creating a new member by (together with a new Insolar Wallet), or
-* By using an existing one if you have already created your Wallet via the `web interface <https://wallet.testnet.insolar.io/create-new-wallet>`_.
+* By creating a new member (together with a new Insolar Wallet), or
+* By using an existing member if you have already created your Wallet via the `web interface <https://wallet.testnet.insolar.io/create-new-wallet>`_
 
 .. note:: This tutorial uses the API endpoint of Insolar TestNet in code samples.
 
@@ -26,7 +26,7 @@ You will build a program (requester) that creates a member on the Insolar networ
 
 The requester forms and sends the following requests to the Insolar’s JSON RPC 2.0 API endpoint and receives the corresponding responses:
 
-#. Gets a **seed** that enables you to call a contract method.
+#. Gets a seed that enables you to call a contract method.
 
 #. (Optional) Forms, signs, and sends a **member creation** request with the seed and receives your member’s reference in response.
 
@@ -40,10 +40,10 @@ The requester forms and sends the following requests to the Insolar’s JSON RPC
 What you will need
 ------------------
 
-* About an hour.
-* Your favorite IDE for Golang and its `programming tools <https://golang.org/doc/install>`_.
-* `Insolar API specification <https://apidocs.insolar.io/platform/latest>`_ as a reference.
-* :ref:`Local Insolar deployment <deploying_devnet>` or Insolar TestNet.
+* About an hour
+* Your favorite IDE for Golang and its `programming tools <https://golang.org/doc/install>`_
+* `Insolar API specification <https://apidocs.insolar.io/platform/latest>`_ as a reference
+* Insolar TestNet as a testing environment
 
 .. _how_to_complete:
 
@@ -75,7 +75,7 @@ To build the requester, go through the following steps:
 
 #. **Form a transfer request** and call the sender function to send it.
 
-#. **Test** the requester against the TestNet.
+#. **Test** the requester against Insolar TestNet.
 
 All the above steps are detailed in sections below.
 
@@ -87,7 +87,7 @@ Step 1: Prepare
 To build the requester, install, import, and set up the following:
 
 #. Set up your development environment if you don't have one. Install the `Go programming tools <https://golang.org/doc/install>`_.
-#. Install a copy of the standard crypto library with the ECDSA secp256k1 curve implementation provided by Insolar:
+#. Install a copy of the standard crypto library with the ECDSA ``secp256k1`` curve implementation provided by Insolar:
 
    .. code-block::
 
@@ -117,10 +117,10 @@ To build the requester, install, import, and set up the following:
         // - Basic cryptography.
         "crypto/rand"
         "crypto/sha256"
+        // - Basic encoding capabilities.
         "encoding/asn1"
         "encoding/base64"
         "encoding/json"
-        // - Basic encoding capabilities.
         "encoding/pem"
         // - A copy of the standard crypto library with
         //   the ECDSA secp256k1 curve implementation.
@@ -135,7 +135,7 @@ To build the requester, install, import, and set up the following:
 
       .. _set_url:
 
-   #. Set the API endpoint URL for the testing environment, either the public one provided by Insolar or :ref:`locally deployed <deploying_devnet>`.
+   #. Set the API endpoint URL to that of TestNet.
    #. Create and initialize an HTTP client for connection re-use and store a ``cookiejar`` inside.
    #. Create a variable for the JSON RPC 2.0 request identifier. The identifier is to be incremented for every request and each corresponding response will contain it.
 
@@ -186,7 +186,7 @@ Step 2: Declare request structures
 
 Next, declare request structures in accordance with the Insolar’s API specification.
 
-To transfer funds, you need structures or classes for:
+To transfer funds, you need structures for:
 
 #. Information request: ``node.getSeed``.
 #. Contract requests: ``member.create`` and ``member.transfer``.
@@ -257,11 +257,11 @@ Each signed request to Insolar API has to contain a seed in its body. Seed is a 
 
 * Has a short lifespan.
 * Expires upon first use.
-* Protects from duplicate requests.
+* Protects from request duplicates.
 
 .. tip:: Due to these qualities, a new seed is required to form each signed contract request.
 
-.. caution:: Since the seed is generated by a node, each subsequent contract request containing the seed must be sent to the node in question. Otherwise, a node will reject the seed generated by a different one. To ensure that the contract request is routed to the correct node, make sure to retrieve all the cookies from the node and store them in the HTTP client intended for re-use as described in the :ref:`preparation step <cookie>`.
+.. caution:: Since the seed is generated by a node, each subsequent contract request containing the seed must be sent to the node in question. Otherwise, a node will reject the seed generated by a different node. To ensure that the contract request is routed to the correct node, retrieve all the cookies from the node and store them in the HTTP client intended for re-use as described in the :ref:`preparation step <cookie>`.
 
 To be able to send signed requests, create a seed getter function to re-use upon forming each such request.
 
@@ -354,7 +354,7 @@ The sender function:
    #. *Signature* that contains (1) the ECDSA signature of the hash's bytes (2) in the ASN.1 DER format (3) represented as a Base64 string.
 
 #. Sends the request.
-#. Returns the response JSON object.
+#. Returns the JSON object from the response.
 
 For example:
 
@@ -448,7 +448,7 @@ Now, every ``sendSignedRequest(payload, privateKey)`` call will return the resul
 With the seed getter and sender functions, you can get the seed and send signed contract requests. The next step is to:
 
 * Generate a key pair and create a member via a special creation request, or
-* Use the existing member account by retrieving the corresponding private key from the Insolar Wallet's web interface and converting the key format to PEM.
+* Use the existing member account by retrieving the corresponding private key from the Insolar Wallet's web interface and converting the key format to PEM
 
 .. _generate_key_pair:
 
@@ -465,9 +465,11 @@ Depending on whether or not you already have an Insolar Wallet (created via the 
 
       To create a member, send the corresponding member creation request—a signed request to a contract method that does the following in the blockchain:
 
-      * Creates a new member and corresponding account objects.
-      * Returns the new member reference — address in the Insolar network.
-      * Binds a given public key to the member. Insolar uses this public key to identify a member and check the signature generated by the paired private key.
+      * Creates a new member and corresponding account objects
+      * Returns the new member reference—address in the Insolar network
+      * Binds a given public key to the member. 
+
+      Insolar uses this public key to identify a member and check the signature generated by the paired private key.
 
       To sign such a request, first:
 
@@ -651,11 +653,11 @@ To transfer funds:
 #. Call the ``getNewSeed()`` function and store the new seed into a variable.
 #. Form a ``member.transfer`` request payload with:
 
-   * A new seed.
-   * An amount of funds to transfer.
-   * The recipient reference.
-   * Your reference (XNS address)—for identification.
-   * And your public key—to check the signature.
+   * A new seed
+   * An amount of funds to transfer
+   * A recipient reference
+   * Your reference (XNS address)—for identification
+   * And your public key—to check the signature
 
 #. Call the ``sendSignedRequest()`` function and pass it the payload and the paired private key.
 
@@ -714,12 +716,12 @@ Step 7: Test the requester
 
 To test the requester, do the following:
 
-#. Make sure the :ref:`endpoint URL <set_url>` is set to that of the testing environment.
+#. Make sure the :ref:`endpoint URL <set_url>` is set to that of TestNet.
 #. Run the requester:
 
    .. code-block:: console
 
-      $ go run Main.go
+      go run Main.go
 
 .. _Summary:
 
