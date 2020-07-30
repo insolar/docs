@@ -40,7 +40,7 @@ If you are a developer, explore Insolar technologies and run Insolar locally for
 
     .. link-button:: integration
         :type: ref
-        :text: Start step-by-step
+        :text: Start step by step
         :classes: btn-link stretched-link font-weight-bold
 
     .. div:: text-muted
