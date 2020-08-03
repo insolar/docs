@@ -4,36 +4,25 @@
 Build an API requester
 ======================
 
-This tutorial walks you through the process of creating a *requester* to `Insolar MainNet API <https://apidocs.insolar.io/platform/latest>`_. You will learn how to **form and sign requests** that create a new member or use the existing one to transfer XNS to other members.
+This tutorial walks you through the process of creating a simple Golang program that can invoke `Insolar MainNet API <https://apidocs.insolar.io/platform/latest>`_.
 
-.. note:: You can also use the `CLI tool <https://github.com/insolar/mainnet/tree/master/application/cmd/requester>`_ of the same name (requester) to access the MainNet API.
+.. note:: You can also use the `CLI tool <https://github.com/insolar/mainnet/tree/master/application/cmd/requester>`_ of the same name (requester) to invoke the API.
 
-Code examples in this tutorial are straightforward, statements are successive (without conditional expressions and cycles), and the main function calls only two additional ones. This lets you focus on the substance rather than code structure: how to use cryptographic functions provided by Golang packages to sign API requests correctly.
+Code examples in this tutorial are straightforward, statements are successive (without conditional expressions and cycles). This lets you focus on substance rather than code structure: how to use cryptographic functions provided by Golang packages to correctly sign API requests to MainNet.
 
 You can learn to sign requests in 2 ways:
 
-* By creating a new member (together with a new Insolar Wallet), or
-* By using an existing member if you have already created your Wallet via the `web interface <https://wallet.testnet.insolar.io/create-new-wallet>`_
+* By creating a new private key (together with a new Insolar Wallet), or
+* By using an existing private key if you have already created your Wallet in the `web interface <https://wallet.testnet.insolar.io/create-new-wallet>`_.
 
-.. note:: This tutorial uses the API endpoint of Insolar TestNet in code samples.
+.. note:: This tutorial uses the API endpoint of Insolar TestNet in code examples.
 
 .. _what_you_will_build:
 
 What you will build
 -------------------
 
-You will build a program (requester) that creates a member on the Insolar network or uses the existing one and, as a member, transfers funds from its account to the account of another member.
-
-The requester forms and sends the following requests to the Insolar’s JSON RPC 2.0 API endpoint and receives the corresponding responses:
-
-#. Gets a seed that enables you to call a contract method.
-
-#. (Optional) Forms, signs, and sends a **member creation** request with the seed and receives your member’s reference in response.
-
-#. Forms, signs, and sends a **transfer** request with a new seed that sends an amount of Insolar coins (XNS):
-
-   * From your member’s account given your reference and signed with your private key.
-   * To another account given a reference to an existing recipient member.
+You will build a program that creates a member on the Insolar network or uses an existing one and, as a member, transfers funds from its account to the account of another member.
 
 .. _what_you_will_need:
 
@@ -42,7 +31,7 @@ What you will need
 
 * About an hour
 * Your favorite IDE for Golang and its `programming tools <https://golang.org/doc/install>`_
-* `Insolar API specification <https://apidocs.insolar.io/platform/latest>`_ as a reference
+* `Insolar MainNet API specification <https://apidocs.insolar.io/platform/latest>`_ as a reference
 * Insolar TestNet as a testing environment
 
 .. _how_to_complete:
@@ -50,32 +39,44 @@ What you will need
 How to complete this tutorial
 -----------------------------
 
-* To start from scratch, go through the :ref:`step-by-instructions <build_requester>` listed below and pay attention to comments in code examples.
-* To skip the basics, read (and copy-paste) the working :ref:`requester code <requester_example>` provided at the end.
+* To start from scratch, go through the :ref:`step-by-step instructions <build_requester>` listed below and pay attention to comments in code examples.
+* To skip the basics, read (and copy-paste) a working :ref:`requester code <requester_example>` provided at the end of this tutorial.
 
 .. _build_requester:
 
 Building the requester
 ----------------------
 
-To build the requester, go through the following steps:
+In Insolar MainNet (and TestNet), all requests to contracts go through two phases:
 
-#. **Prepare**: install the necessary tools, import the necessary packages, and initialize an HTTP client.
+**Phase 1**: A client requests a seed from a node. The seed is a unique piece of information (explained in more detail in the following sections).
 
-#. **Declare** request **structures** in accordance with the Insolar’s API specification.
+**Phase 2**: The client forms and sends a contract request in the following way:
 
-#. **Create a seed getter** function. The getter will be reused to put a new seed into every signed request.
+#. Puts the seed value and a public key into a contract request body.
+#. Takes a hash of the body's bytes.
+#. Signs the hash with a private key.
+#. Puts both the hash and signature into corresponding headers.
+#. Sends the request to the node that provided the seed in the previous phase.
 
-#. **Create a sender** function that signs and sends requests given a private key.
+To automate this process, you can build a simple requester program by completing the following steps:
 
-#. **Create a new member or use the existing one**:
+#. :ref:`Prepare <prepare>`: install the necessary tools, import the necessary packages, and initialize an HTTP client.
 
-   * Generate a key pair, export the private key into a file, store it in some secure place, form a member creation request, and call the sender function to send it.
-   * Log in to an already existing Insolar Wallet, copy your XNS account address and private key, and, in code, convert the key to PEM format to sign the request in the next step.
+#. :ref:`Declare structures <declare_structs>` that correspond to request bodies described in the `Insolar API specification <https://apidocs.insolar.io/platform/latest>`_.
 
-#. **Form a transfer request** and call the sender function to send it.
+#. :ref:`Create a seed getter <create_seed_getter>` function. The getter is reused to put a new seed into every contract request.
 
-#. **Test** the requester against Insolar TestNet.
+#. :ref:`Create a sender function <create_sender>` that signs and sends contract requests given a private key.
+
+#. :ref:`Generate a new private key or use an existing one <generate_key_pair>`. Choose one of the following:
+
+   * Generate a key pair, store the private key in a secure place, and register a new member in the network by sending a contract request with the public key.
+   * Log in to your Insolar Wallet, copy your private key, and convert it to an appropriate format to be able to sign requests.
+
+#. :ref:`Form and send a transfer request <form_transfer>`: get a new seed and call the sender function.
+
+#. :ref:`Test <test_requester>` the requester against Insolar TestNet.
 
 All the above steps are detailed in sections below.
 
@@ -86,14 +87,13 @@ Step 1: Prepare
 
 To build the requester, install, import, and set up the following:
 
-#. Set up your development environment if you don't have one. Install the `Go programming tools <https://golang.org/doc/install>`_.
-#. Install a copy of the standard crypto library with the ECDSA ``secp256k1`` curve implementation provided by Insolar:
+#. Install a copy of the standard crypto library with the ``secp256k1`` elliptic curve implementation provided by Insolar:
 
    .. code-block::
 
       go get -t github.com/insolar/x-crypto/ecdsa/...
 
-#. With the Golang programming tools, you don't need to “reinvent the wheel”: create a ``Main.go`` file and, inside, import the packages your requester will use. For example:
+#. In a new ``Main.go`` file, import the packages your requester will use (or skip this step and let your IDE do it for you along the way). For example:
 
    .. code-block:: Go
       :linenos:
@@ -102,7 +102,7 @@ To build the requester, install, import, and set up the following:
 
       import (
         // You will need:
-        // - Some basic Golang functionality.
+        // - Basic Golang functionality.
         "bytes"
         "fmt"
         "golang.org/x/net/publicsuffix"
@@ -129,14 +129,14 @@ To build the requester, install, import, and set up the following:
         "github.com/insolar/x-crypto/x509"
       )
 
-#. To prepare the requester, do the following:
+#. Declare, set, and initialize the following:
 
    #. Insolar supports ECDSA-signed requests. Since an ECDSA signature in Golang consists of two big integers, declare a single structure to contain it.
 
       .. _set_url:
 
    #. Set the API endpoint URL to that of TestNet.
-   #. Create and initialize an HTTP client for connection re-use and store a ``cookiejar`` inside.
+   #. Create and initialize an HTTP client for connection reuse and store a ``cookiejar`` inside.
    #. Create a variable for the JSON RPC 2.0 request identifier. The identifier is to be incremented for every request and each corresponding response will contain it.
 
    .. _cookie:
@@ -145,19 +145,20 @@ To build the requester, install, import, and set up the following:
 
    .. code-block:: Go
       :linenos:
+      :lineno-start: 31
 
-      // Declare a structure to contain the ECDSA signature:
+      // Declare a structure to contain the ECDSA signature.
       type ecdsaSignature struct {
         R, S *big.Int
       }
 
-      // Set the endpoint URL to that of TestNet:
+      // Set the endpoint URL to that of TestNet.
       const (
         TestNetURL = "https://wallet-api.testnet.insolar.io/api/rpc"
       )
 
-      // Create and initialize an HTTP client for connection re-use
-      // and put a cookiejar into it:
+      // Create and initialize an HTTP client for connection reuse
+      // and put a cookiejar into it.
       var client *http.Client
       var jar cookiejar.Jar
       func init() {
@@ -172,38 +173,45 @@ To build the requester, install, import, and set up the following:
         }
       }
 
-      // Create a variable for the JSON RPC 2.0 request identifier:
+      // Create a variable for the JSON RPC 2.0 request identifier.
       var id int = 1
-      // The identifier is to be incremented for every request
-      // and each corresponding response will contain it.
+      // The identifier is incremented in every request
+      // and each corresponding response contains it.
 
-With that, everything your requester needs is set up.
+With that, everything your requester requires is set up.
 
-.. _declare_structs_or_classes:
+Next, declare request structures in accordance with the Insolar API specification.
+
+.. _declare_structs:
 
 Step 2: Declare request structures
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Next, declare request structures in accordance with the Insolar’s API specification.
+To invoke the MainNet (or TestNet) API, you need structures for three requests: `seed getter <https://apidocs.insolar.io/platform/v1#operation/get-seed>`_, `member creation <https://apidocs.insolar.io/platform/v1#operation/member-create>`_, and `transfer <https://apidocs.insolar.io/platform/v1#operation/member-transfer>`_.
 
-To transfer funds, you need structures for:
+All the requests have the same base structure in accordance with the `JSON RPC 2.0 specification <https://www.jsonrpc.org/specification>`_. For example:
 
-#. Information request: ``node.getSeed``.
-#. Contract requests: ``member.create`` and ``member.transfer``.
+.. code-block:: json
 
-Both information and contract requests have the same base structure in accordance with the `JSON RPC 2.0 specification <https://www.jsonrpc.org/specification>`_.
-Therefore, define the base structure once and expand it for all requests with their specific fields.
+    {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "contract.call"
+      "params": { ... }
+    }
 
-For example:
+Where ``"params"`` is an optional object that may contain parameters of a particular method.
+
+Define the base structure and nest more structures for all the required parameters. For example:
 
 .. code-block:: Go
    :linenos:
+   :lineno-start: 61
 
    // Continue in the Main.go file...
 
-   // Declare a nested structure to form requests to Insolar API
+   // Declare a base structure to form requests to Insolar API
    // in accordance with the specification.
-   // The Platform uses the basic JSON RPC 2.0 request structure:
    type requestBody struct {
      JSONRPC        string         `json:"jsonrpc"`
      ID             int            `json:"id"`
@@ -214,11 +222,11 @@ For example:
      JSONRPC        string         `json:"jsonrpc"`
      ID             int            `json:"id"`
      Method         string         `json:"method"`
-     // Params is a structure that depends on a particular method:
+     // Params is a structure that depends on a particular method.
      Params         interface{}    `json:"params"`
    }
 
-   // The Platform defines params of the signed request as follows:
+   // Insolar MainNet defines params of a contract request as follows.
    type params struct {
      Seed            string       `json:"seed"`
      CallSite        string       `json:"callSite"`
@@ -227,26 +235,27 @@ For example:
      PublicKey       string       `json:"publicKey"`
    }
 
+   // The transfer request has a reference in params.
    type paramsWithReference struct {
      params
      Reference       string  `json:"reference"`
    }
 
-   // The member.create request has no parameters,
-   // so it's an empty structure:
+   // The member.create request has no callParams,
+   // so here goes an empty structure.
    type memberCreateCallParams struct {}
 
    // The transfer request sends an amount of funds to
-   // the member identified by a reference:
+   // a member identified by a reference.
    type transferCallParams struct {
      Amount            string    `json:"amount"`
      ToMemberReference string    `json:"toMemberReference"`
    }
 
-Now that the requester knows which information and contract requests it is supposed to send, create the following functions:
+Now that the requester has all the requests structures it is supposed to use, the next step is to create the following functions:
 
-#. Seed getter for the information request.
-#. Sender for contract requests.
+#. A seed getter to retrieve a new seed for each contract request.
+#. A sender function that signs and sends contract requests.
 
 .. _create_seed_getter:
 
@@ -259,44 +268,45 @@ Each signed request to Insolar API has to contain a seed in its body. Seed is a 
 * Expires upon first use.
 * Protects from request duplicates.
 
-.. tip:: Due to these qualities, a new seed is required to form each signed contract request.
+Upon receiving a contract request, any node checks if it was the one that generated the seed and if the seed is still alive. So, each contract request with a seed must be sent to the node you requested the seed from.
 
-.. caution:: Since the seed is generated by a node, each subsequent contract request containing the seed must be sent to the node in question. Otherwise, a node will reject the seed generated by a different node. To ensure that the contract request is routed to the correct node, retrieve all the cookies from the node and store them in the HTTP client intended for re-use as described in the :ref:`preparation step <cookie>`.
+.. tip:: To make sure that the contract request is routed to the correct node, retrieve all the cookies with routing information from the node's response and store them in the HTTP client as described in the :ref:`preparation step <cookie>`.
 
-To be able to send signed requests, create a seed getter function to re-use upon forming each such request.
+To form contract requests, create a seed getter function you can reuse.
 
-The seed getter:
+The seed getter does the following:
 
 #. Forms a ``node.getSeed`` request body in JSON format.
-#. Creates an *unsigned* HTTP request with the body and a Content-Type (``application/json``) HTTP header.
+#. Creates an HTTP request with the body and a Content-Type (``application/json``) HTTP header.
 #. Sends the request and receives a response.
-#. Retrieves the acquired seed from the response and returns it.
+#. Retrieves the seed from the response and returns it.
 
 For example:
 
 .. code-block:: Go
    :linenos:
+   :lineno-start: 104
 
    // Continue in the Main.go file...
 
-   // Create a function to get a new seed for each signed request:
+   // Create a function to get a new seed for each signed request.
    func getNewSeed() (string) {
-     // Form a request body for getSeed:
+     // Form a request body for getSeed.
      getSeedReq := requestBody{
        JSONRPC: "2.0",
        Method:  "node.getSeed",
        ID:      id,
      }
-     // Increment the id for future requests:
+     // Increment the id for future requests.
      id++
 
-     // Marshal the payload into JSON:
+     // Marshal the payload into JSON.
      jsonSeedReq, err := json.Marshal(getSeedReq)
      if err != nil {
        log.Fatalln(err)
      }
 
-     // Create a new HTTP request and send it:
+     // Create a new HTTP request.
      seedReq, err := http.NewRequest("POST", TestNetURL,
        bytes.NewBuffer(jsonSeedReq))
      if err != nil {
@@ -304,57 +314,57 @@ For example:
      }
      seedReq.Header.Set("Content-Type", "application/json")
 
-     // Perform the request:
+     // Send the request.
      seedResponse, err := client.Do(seedReq)
      if err != nil {
        log.Fatalln(err)
      }
      defer seedReq.Body.Close()
 
-     // Receive the response body:
+     // Receive the response body.
      seedRespBody, err := ioutil.ReadAll(seedResponse.Body)
      if err != nil {
        log.Fatalln(err)
      }
 
-     // Unmarshal the response:
+     // Unmarshal the response.
      var newSeed map[string]interface{}
      err = json.Unmarshal(seedRespBody, &newSeed)
      if err != nil {
        log.Fatalln(err)
      }
 
-     // (Optional) Print the request and its response:
+     // (Optional) Print the request and its response.
      print := "POST to " + TestNetURL +
        "\nPayload: " + string(jsonSeedReq) +
        "\nResponse status code: " +  strconv.Itoa(seedResponse.StatusCode) +
        "\nResponse: " + string(seedRespBody) + "\n"
      fmt.Println(print)
 
-     // Retrieve and return the current seed:
+     // Retrieve and return the new seed.
      return newSeed["result"].(map[string]interface{})["seed"].(string)
    }
 
-Now, every ``getNewSeed()`` call will return a living seed that can be put into the contract request body.
+Now, every ``getNewSeed()`` call returns a living seed that can be put into the body of a contract request.
 
-The next step is to create a sender function that signs and sends contract requests.
+The next step is to create a sender function that signs and sends such requests.
 
 .. _create_sender:
 
 Step 4: Create a sender function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The sender function:
+The sender function does the following:
 
-#. Takes some request body (payload) and the ECDSA private key.
-#. Forms an HTTP request with the payload and relevant HTTP headers:
+#. Takes a request body and an ECDSA private key as arguments.
+#. Forms an HTTP request with the body and the following HTTP headers:
 
    #. *Content-Type* — ``application/json``.
-   #. *Digest* that contains (1) a SHA-256 hash of the payload's bytes (2) represented as a Base64 string.
-   #. *Signature* that contains (1) the ECDSA signature of the hash's bytes (2) in the ASN.1 DER format (3) represented as a Base64 string.
+   #. *Digest* that contains a Base64 string with an SHA-256 hash of the body's bytes.
+   #. *Signature* that contains a Base64 string with an ECDSA signature (in ASN.1 DER format) of the hash's bytes.
 
 #. Sends the request.
-#. Returns the JSON object from the response.
+#. Retrieves the response and returns it as a JSON object.
 
 For example:
 
@@ -362,28 +372,30 @@ For example:
 
 .. code-block:: Go
    :linenos:
+   :lineno-start: 161
 
    // Continue in the Main.go file...
 
-   // Create a function to send signed requests:
+   // Create a function to send signed requests.
    func sendSignedRequest(payload requestBodyWithParams, 
      privateKey *ecdsa.PrivateKey) map[string]interface{} {
-     // Marshal the payload into JSON:
+
+     // Marshal the payload into JSON.
      jsonPayload, err := json.Marshal(payload)
      if err != nil {
        log.Fatalln(err)
      }
 
-     // Take a SHA-256 hash of the payload's bytes:
+     // Take a SHA-256 hash of the payload's bytes.
      hash := sha256.Sum256(jsonPayload)
 
-     // Sign the hash with the private key:
+     // Sign the hash with the private key.
      r, s, err := ecdsa.Sign(rand.Reader, privateKey, hash[:])
      if err != nil {
        log.Fatalln(err)
      }
 
-     // Convert the signature into ASN.1 DER format:
+     // Convert the signature into ASN.1 DER format.
      sig := ecdsaSignature{
        R: r,
        S: s,
@@ -393,11 +405,11 @@ For example:
        log.Fatalln(err)
      }
 
-     // Convert both hash and signature into a Base64 string:
+     // Encode both hash and signature to a Base64 string.
      hash64 := base64.StdEncoding.EncodeToString(hash[:])
      signature64 := base64.StdEncoding.EncodeToString(signature)
 
-     // Create a new request and set its headers:
+     // Create a new request and set its headers.
      request, err := http.NewRequest("POST", TestNetURL, 
        bytes.NewBuffer(jsonPayload))
      if err != nil {
@@ -405,106 +417,107 @@ For example:
      }
      request.Header.Set("Content-Type", "application/json")
 
-     // Put the hash string into the HTTP Digest header:
+     // Put the hash string into the HTTP Digest header.
      request.Header.Set("Digest", "SHA-256="+hash64)
 
-     // Put the signature string into the HTTP Signature header:
-      request.Header.Set("Signature", "keyId=\"public-key\", " +
+     // Put the signature string into the HTTP Signature header.
+     request.Header.Set("Signature", "keyId=\"public-key\", " +
         "algorithm=\"ecdsa\", headers=\"digest\", signature="+signature64)
 
-     // Send the signed request:
+     // Send the signed request.
      response, err := client.Do(request)
      if err != nil {
        log.Fatalln(err)
      }
      defer response.Body.Close()
 
-     // Receive the response body:
+     // Receive the response body.
      responseBody, err := ioutil.ReadAll(response.Body)
      if err != nil {
        log.Fatalln(err)
      }
 
-     // Unmarshal it into a JSON object:
+     // Unmarshal it into a JSON object.
      var JSONObject map[string]interface{}
      err = json.Unmarshal(responseBody, &JSONObject)
      if err != nil {
        log.Fatalln(err)
      }
 
-     // (Optional) Print the request and its response:
+     // (Optional) Print the request and its response.
      print := "POST to " + TestNetURL +
        "\nPayload: " + string(jsonPayload) +
        "\nResponse status code: " + strconv.Itoa(response.StatusCode) +
        "\nResponse: " + string(responseBody) + "\n"
      fmt.Println(print)
 
-     // Return the response:
+     // Return the JSON object.
      return JSONObject
    }
 
-Now, every ``sendSignedRequest(payload, privateKey)`` call will return the result of a contract method.
+Now, every ``sendSignedRequest(payload, privateKey)`` call returns the result of a contract method execution.
 
-With the seed getter and sender functions, you can get the seed and send signed contract requests. The next step is to:
+With the seed getter and sender functions, you have everything you need to send a contract request. The next step is to:
 
-* Generate a key pair and create a member via a special creation request, or
-* Use the existing member account by retrieving the corresponding private key from the Insolar Wallet's web interface and converting the key format to PEM
+* Generate a key pair and create a member using a special contract request, or
+* Use an existing member account by retrieving the corresponding private key from the Insolar Wallet's web interface and converting the key to PEM format.
 
 .. _generate_key_pair:
 
-Step 5: Create a new key pair or use the existing one
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Step 5: Generate a new key pair or use an existing one
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The body of each request that calls a contract method must be hashed by a ``SHA256`` algorithm. Each hash must be signed by a private key generated by a ``P256`` elliptic curve.
+The body of each request that calls a contract method must be hashed by a ``SHA256`` algorithm. Each hash must be signed by a private key generated by a ``p256k1`` elliptic curve.
 
-Depending on whether or not you already have an Insolar Wallet (created via the web interface), choose to:
+Depending on whether or not you already have an Insolar Wallet, choose one of the following:
 
 .. tabs::
 
    .. tab:: Generate a key pair and create a member
 
-      To create a member, send the corresponding member creation request—a signed request to a contract method that does the following in the blockchain:
+      To create a member, send the corresponding member creation request—a signed request to a contract method that does the following:
 
-      * Creates a new member and corresponding account objects
-      * Returns the new member reference—address in the Insolar network
-      * Binds a given public key to the member. 
+      * Creates a new member and corresponding account objects.
+      * Returns a reference to the member—address in the Insolar network.
+      * Binds a given public key to the member.
 
       Insolar uses this public key to identify a member and check the signature generated by the paired private key.
 
-      To sign such a request, first:
+      .. warning:: You will not be able to access your member object without the private key and, as such, transfer funds.
 
-      #. Generate a key pair using the said curve and convert it into PEM format.
+      First, take care of the keys by following these steps:
 
-         .. warning:: You will not be able to access your member object without the private key and, as such, transfer funds.
-
+      #. Generate a key pair using the elliptic curve and convert both keys to PEM format.
       #. Export the private key into a file.
-      #. Save the file to some secure place.
+      #. Save the file to a secure place.
 
       Next, form and sigh the member creation request:
 
-      #. Call the ``getNewSeed()`` function and store the new seed into a variable.
-      #. Form the ``member.create`` request payload with the seed and the public key generated in the :ref:`previous step <generate_key_pair>`.
-      #. Call the ``sendSignedRequest()`` function and pass it the payload and the private key.
-      #. Put the returned member reference into a variable. The subsequent transfer request requires it.
+      #. Call the ``getNewSeed()`` function and put a new seed into a variable.
+      #. Form the ``member.create`` request body with the seed and the generated public key.
+      #. Call the ``sendSignedRequest()`` function, pass it the body and the private key, and receive a member reference in response.
+      #. Put the reference into a variable (the transfer request in the next step requires it).
 
       For example:
 
-      .. tip:: In Golang, to encode the key into the PEM format, first, convert it into ASN.1 DER using the ``x509`` library.
+      .. tip:: To encode the key to PEM format, first, convert it to ASN.1 DER using the ``x509`` library.
 
       .. code-block:: Go
          :linenos:
+         :lineno-start: 241
 
          // Continue in the Main.go file...
 
-         // Create the main function to form and send signed requests:
+         // Create the main function to form and send signed requests.
          func main() {
-           // Generate a key pair:
+
+           // Generate a key pair.
            privateKey := new(xecdsa.PrivateKey)
            privateKey, err := xecdsa.GenerateKey(xelliptic.P256(), rand.Reader)
            var publicKey xecdsa.PublicKey
            publicKey = privateKey.PublicKey
 
-           // Convert both private and public keys into PEM format:
+           // Convert both private and public keys into PEM format.
            x509PublicKey, err := x509.MarshalPKIXPublicKey(&publicKey)
            if err != nil {
              log.Fatalln(err)
@@ -520,7 +533,7 @@ Depending on whether or not you already have an Insolar Wallet (created via the 
               Bytes: x509PrivateKey})
 
            // The private key is required to sign requests.
-           // Make sure to put into a file to save it in some secure place later:
+           // Make sure to put it into a file to save it to a secure place later.
            file, err := os.Create("private.pem")
            if err != nil {
              fmt.Println(err)
@@ -529,9 +542,9 @@ Depending on whether or not you already have an Insolar Wallet (created via the 
            file.WriteString(string(pemPrivateKey))
            file.Close()
 
-           // Get a seed to form the request:
+           // Get a seed to form the request.
            seed := getNewSeed()
-           // Form a request body for member.create:
+           // Form a request body for member.create.
            createMemberReq := requestBodyWithParams{
              JSONRPC: "2.0",
              Method:  "contract.call",
@@ -542,14 +555,14 @@ Depending on whether or not you already have an Insolar Wallet (created via the 
                CallParams:memberCreateCallParams {},
                PublicKey: string(pemPublicKey)},
            }
-           // Increment the JSON RPC 2.0 request identifier for future requests:
+           // Increment the JSON RPC 2.0 request identifier for future requests.
            id++
 
-           // Send the signed member.create request:
+           // Send the signed member.create request.
            newMember := sendSignedRequest(createMemberReq, privateKey)
 
            // Put the reference to your new member into a variable
-           // to send transfer requests:
+           // to easily form transfer requests.
            memberReference := newMember["result"].(
            map[string]interface{})["callResult"].(
            map[string]interface{})["reference"].(string)
@@ -559,9 +572,9 @@ Depending on whether or not you already have an Insolar Wallet (created via the 
 
       Now that you have your member reference and key pair, you can transfer funds to other members.
 
-   .. tab:: Use the existing private key
+   .. tab:: Use an existing private key
 
-      To use the key:
+      To use the key, follow these steps:
 
       #. Log in to your `Insolar Wallet <https://wallet.testnet.insolar.io/>`_.
 
@@ -582,42 +595,44 @@ Depending on whether or not you already have an Insolar Wallet (created via the 
          .. image:: imgs/copy-priv-key.png
             :width: 450px
 
-      Next, consider the code sample below that:
+      Next, consider the code sample below that does the following:
 
-      #. Starts the main function.
-      #. In the main function, uses the private key and elliptic curve key to calculate the public key.
+      #. Uses the private key and elliptic curve to calculate the public key.
       #. Converts both public and private keys into PEM format as the API requires.
 
-      .. attention:: In code sample below, copy your XNS address and private key and replace the ``insolar:XXX...`` and ``HHH...`` placeholders respectively in the highlighted lines. The XNS address is required to form transfer requests as described in the next step.
+      .. attention:: Copy your XNS address and private key and, in the highlighted lines, replace the ``insolar:XXX...`` and ``HHH...`` placeholders respectively. The XNS address is required to form transfer requests as described in the next step.
 
       .. code-block:: Go
          :linenos:
-         :emphasize-lines: 5, 9
+         :emphasize-lines: 7, 11
+         :lineno-start: 241
 
-          // Create the main function to form and send signed requests:
+          // Continue in the Main.go file...
+
+          // Create the main function to form and send signed requests.
           func main() {
             // Log in to your Insolar Wallet, copy the XNS account address,
-            // allocate a variable for it and paste the value (replace the Xs).
+            // allocate a variable for it, and paste the value (replace the Xs).
             memberReference := "insolar:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
             // In the Wallet, open Settings > Reveal private key, enter your password,
-            // copy the key, allocate a variable for it and paste the value (replace the Hs).
+            // copy the key, allocate a variable for it, and paste the value (replace the Hs).
             hexPrivate := "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
 
             // Declare a new big int variable, specify the key as its value,
-            // and set its format to base 16:
+            // and set its format to base16.
             i := new(big.Int)
             i.SetString(hexPrivate,16)
 
             // Create a new elliptic curve and feed the value to it
-            // to get the X and Y values of the public key:
+            // to get the X and Y values of the public key.
             privateKey := new(xecdsa.PrivateKey)
             privateKey.PublicKey.Curve = xelliptic.P256K()
             privateKey.D = i
             privateKey.PublicKey.X, privateKey.PublicKey.Y = xelliptic.P256K(
               ).ScalarBaseMult(i.Bytes())
 
-            // Convert the private key to PEM:
+            // Convert the private key to PEM.
             x509Encoded, err := x509.MarshalPKCS8PrivateKey(privateKey)
             if err != nil {
               panic(err)
@@ -625,57 +640,60 @@ Depending on whether or not you already have an Insolar Wallet (created via the 
             pemPrivateKey := pem.EncodeToMemory(&pem.Block{Type:
               "PRIVATE KEY", Bytes: x509Encoded})
 
-            // Convert the public key to PEM:
+            // Convert the public key to PEM.
             x509EncodedPub, err := x509.MarshalPKIXPublicKey(&privateKey.PublicKey)
             if err != nil {
               panic(err)
             }
             pemPublicKey := pem.EncodeToMemory(&pem.Block{Type:
               "PUBLIC KEY", Bytes: x509EncodedPub})
-            // (Optional) Print the key pair:
+            // (Optional) Print the key pair.
             fmt.Println(string(pemPrivateKey))
             fmt.Println(string(pemPublicKey))
 
             // The main function is to be continued...
 
-      Now that you've calculated the public key and and converted both public and private keys to PEM, you can transfer funds to other members.
+      Now that you've calculated the public key and converted both public and private keys to PEM, you can transfer funds to other members.
 
 .. _form_transfer:
 
 Step 6: Form and send a transfer request
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The transfer request is a signed request to a contract method that transfers some amount of funds to another member.
+The transfer request is a signed request to a contract method that transfers an amount of funds to another member.
 
-To transfer funds:
+To transfer funds, follow these steps:
 
-#. Acquire the recipient reference — the reference to an existing member to whom you want to transfer the funds.
-#. Call the ``getNewSeed()`` function and store the new seed into a variable.
-#. Form a ``member.transfer`` request payload with:
+#. In the `web interface <https://wallet.testnet.insolar.io/create-new-wallet>`_, send some funds to your XNS address or member reference returned by the member creation request. 
+#. Acquire a recipient reference—reference to an existing member to transfer the funds to.
+#. Call the ``getNewSeed()`` function and put a new seed into a variable.
+#. Form a ``member.transfer`` request body with the following values:
 
    * A new seed
    * An amount of funds to transfer
    * A recipient reference
    * Your reference (XNS address)—for identification
-   * And your public key—to check the signature
+   * Your public key—to check the signature
 
-#. Call the ``sendSignedRequest()`` function and pass it the payload and the paired private key.
+#. Call the ``sendSignedRequest()`` function and pass it the body and the private key.
 
-The transfer request will return the factual fee value in its response.
+The transfer request responds with a fee value.
 
 For example:
 
-.. attention:: In the highlighted line, replace the ``insolar:YYY...`` placeholder with the reference to the existing recipient member.
+.. attention:: In the highlighted line, replace the ``insolar:YYY...`` placeholder with the reference to an existing recipient member.
 
 .. code-block:: Go
    :linenos:
-   :emphasize-lines: 15
+   :emphasize-lines: 16
+   :lineno-start: 304
 
    // Continue in the main() function...
 
-   // Get a new seed to form a transfer request:
+   // Get a new seed to form a transfer request.
    seed = getNewSeed()
-   // Form a request body for transfer:
+
+   // Form a request body for the transfer request.
    transferReq := requestBodyWithParams{
      JSONRPC: "2.0",
      Method:  "contract.call",
@@ -692,10 +710,10 @@ For example:
        Reference: string(memberReference),
      },
    }
-   // Increment the id for future requests:
+   // Increment the id for future requests.
    id++
 
-   // Send the signed transfer request:
+   // Send the signed transfer request.
    newTransfer := sendSignedRequest(transferReq, privateKey)
    fee := newTransfer["result"].(
      map[string]interface{})["callResult"].(
@@ -728,24 +746,24 @@ To test the requester, do the following:
 Summary
 -------
 
-Congratulations! You have just developed a requester capable of forming signed requests to interact with the Insolar API.
+Congratulations! You have just developed a requester capable of forming signed contract requests to Insolar MainNet API.
 
 Build upon it:
 
-#. Create structures for other requests in accordance with the Insolar API specification.
+#. Create structures for other contract requests.
 #. Export the getter and sender functions to use them in other packages.
 
 .. _requester_example:
 
-Complete requester code examples
---------------------------------
+Full requester code examples
+----------------------------
 
-Below are the complete requester code examples in Golang. Click the panels to expand and click again to hide.
+Below are the full requester code examples in Golang. Click the panels to expand and click again to hide.
 
-.. dropdown:: :fa:`eye,mr-1` API requester that creates a new member
+.. dropdown:: :fa:`eye,mr-1` API requester that generates a new private key
    :animate: fade-in
 
-   .. attention:: In the highlighted line, replace the ``insolar:YYY...`` placeholder with a reference to the existing recipient member.
+   .. attention:: In the highlighted line, replace the ``insolar:YYY...`` placeholder with a reference to an existing recipient member.
 
    .. code-block:: Go
       :linenos:
@@ -755,7 +773,7 @@ Below are the complete requester code examples in Golang. Click the panels to ex
 
       import (
         // You will need:
-        // - Some basic Golang functionality.
+        // - Basic Golang functionality.
         "bytes"
         "fmt"
         "golang.org/x/net/publicsuffix"
@@ -771,10 +789,10 @@ Below are the complete requester code examples in Golang. Click the panels to ex
         // - Basic cryptography.
         "crypto/rand"
         "crypto/sha256"
+        // - Basic encoding capabilities.
         "encoding/asn1"
         "encoding/base64"
         "encoding/json"
-        // - Basic encoding capabilities.
         "encoding/pem"
         // - A copy of the standard crypto library with
         //   the ECDSA secp256k1 curve implementation.
@@ -783,18 +801,18 @@ Below are the complete requester code examples in Golang. Click the panels to ex
         "github.com/insolar/x-crypto/x509"
       )
 
-      // Declare a structure to contain the ECDSA signature:
+      // Declare a structure to contain the ECDSA signature.
       type ecdsaSignature struct {
         R, S *big.Int
       }
 
-      // Set the endpoint URL to that of TestNet:
+      // Set the endpoint URL to that of TestNet.
       const (
         TestNetURL = "https://wallet-api.testnet.insolar.io/api/rpc"
       )
 
-      // Create and initialize an HTTP client for connection re-use
-      // and put a cookiejar into it:
+      // Create and initialize an HTTP client for connection reuse
+      // and put a cookiejar into it.
       var client *http.Client
       var jar cookiejar.Jar
       func init() {
@@ -808,14 +826,14 @@ Below are the complete requester code examples in Golang. Click the panels to ex
         }
       }
 
-      // Create a variable for the JSON RPC 2.0 request identifier:
+      // Create a variable for the JSON RPC 2.0 request identifier.
       var id int = 1
       // The identifier is to be incremented for every request and
       // each corresponding response will contain it.
 
       // Declare a nested structure to form requests to Insolar API
       // in accordance with the specification.
-      // The Platform uses the basic JSON RPC 2.0 request structure:
+      // Insolar MainNet uses the basic JSON RPC 2.0 request structure.
       type requestBody struct {
         JSONRPC        string         `json:"jsonrpc"`
         ID             int            `json:"id"`
@@ -826,11 +844,11 @@ Below are the complete requester code examples in Golang. Click the panels to ex
         JSONRPC        string         `json:"jsonrpc"`
         ID             int            `json:"id"`
         Method         string         `json:"method"`
-        // Params is a structure that depends on a particular method:
+        // Params is a structure that depends on a particular method.
         Params         interface{}    `json:"params"`
       }
 
-      // The Platform defines params of the signed request as follows:
+      // Insolar MainNet defines params of the signed request as follows.
       type params struct {
         Seed            string       `json:"seed"`
         CallSite        string       `json:"callSite"`
@@ -855,7 +873,7 @@ Below are the complete requester code examples in Golang. Click the panels to ex
         ToMemberReference string    `json:"toMemberReference"`
       }
 
-      // Create a function to get a new seed for each signed request:
+      // Create a function to get a new seed for each signed request.
       func getNewSeed() string {
         // Form a request body for getSeed:
         getSeedReq := requestBody{
@@ -863,16 +881,16 @@ Below are the complete requester code examples in Golang. Click the panels to ex
           Method:  "node.getSeed",
           ID:      id,
         }
-        // Increment the id for future requests:
+        // Increment the id for future requests.
         id++
 
-        // Marshal the payload into JSON:
+        // Marshal the payload into JSON.
         jsonSeedReq, err := json.Marshal(getSeedReq)
         if err != nil {
           log.Fatalln(err)
         }
 
-        // Create a new HTTP request and send it:
+        // Create a new HTTP request and send it.
         seedReq, err := http.NewRequest("POST", TestNetURL,
           bytes.NewBuffer(jsonSeedReq))
         if err != nil {
@@ -880,38 +898,38 @@ Below are the complete requester code examples in Golang. Click the panels to ex
         }
         seedReq.Header.Set("Content-Type", "application/json")
 
-        // Perform the request:
+        // Perform the request.
         seedResponse, err := client.Do(seedReq)
         if err != nil {
           log.Fatalln(err)
         }
         defer seedReq.Body.Close()
 
-        // Receive the response body:
+        // Receive the response body.
         seedRespBody, err := ioutil.ReadAll(seedResponse.Body)
         if err != nil {
           log.Fatalln(err)
         }
 
-        // Unmarshal the response:
+        // Unmarshal the response.
         var newSeed map[string]interface{}
         err = json.Unmarshal(seedRespBody, &newSeed)
         if err != nil {
           log.Fatalln(err)
         }
 
-        // (Optional) Print the request and its response:
+        // (Optional) Print the request and its response.
         print := "POST to " + TestNetURL +
           "\nPayload: " + string(jsonSeedReq) +
           "\nResponse status code: " +  strconv.Itoa(seedResponse.StatusCode) +
           "\nResponse: " + string(seedRespBody) + "\n"
         fmt.Println(print)
 
-        // Retrieve and return the current seed:
+        // Retrieve and return the current seed.
         return newSeed["result"].(map[string]interface{})["seed"].(string)
       }
 
-      // Create a function to send signed requests:
+      // Create a function to send signed requests.
       func sendSignedRequest(payload requestBodyWithParams,
         privateKey *xecdsa.PrivateKey) map[string]interface{} {
         // Marshal the payload into JSON:
@@ -920,16 +938,16 @@ Below are the complete requester code examples in Golang. Click the panels to ex
           log.Fatalln(err)
         }
 
-        // Take a SHA-256 hash of the payload's bytes:
+        // Take a SHA-256 hash of the payload's bytes.
         hash := sha256.Sum256(jsonPayload)
 
-        // Sign the hash with the private key:
+        // Sign the hash with the private key.
         r, s, err := xecdsa.Sign(rand.Reader, privateKey, hash[:])
         if err != nil {
           log.Fatalln(err)
         }
 
-        // Convert the signature into ASN.1 DER format:
+        // Convert the signature into ASN.1 DER format.
         sig := ecdsaSignature{
           R: r,
           S: s,
@@ -939,11 +957,11 @@ Below are the complete requester code examples in Golang. Click the panels to ex
           log.Fatalln(err)
         }
 
-        // Convert both hash and signature into a Base64 string:
+        // Convert both hash and signature into a Base64 string.
         hash64 := base64.StdEncoding.EncodeToString(hash[:])
         signature64 := base64.StdEncoding.EncodeToString(signature)
 
-        // Create a new request and set its headers:
+        // Create a new request and set its headers.
         request, err := http.NewRequest("POST", TestNetURL,
           bytes.NewBuffer(jsonPayload))
         if err != nil {
@@ -951,45 +969,45 @@ Below are the complete requester code examples in Golang. Click the panels to ex
         }
         request.Header.Set("Content-Type", "application/json")
 
-        // Put the hash string into the HTTP Digest header:
+        // Put the hash string into the HTTP Digest header.
         request.Header.Set("Digest", "SHA-256="+hash64)
 
-        // Put the signature string into the HTTP Signature header:
+        // Put the signature string into the HTTP Signature header.
         request.Header.Set("Signature", "keyId=\"public-key\", " +
           "algorithm=\"ecdsa\", headers=\"digest\", signature="+signature64)
 
-        // Send the signed request:
+        // Send the signed request.
         response, err := client.Do(request)
         if err != nil {
           log.Fatalln(err)
         }
         defer response.Body.Close()
 
-        // Receive the response body:
+        // Receive the response body.
         responseBody, err := ioutil.ReadAll(response.Body)
         if err != nil {
           log.Fatalln(err)
         }
 
-        // Unmarshal it into a JSON object:
+        // Unmarshal it into a JSON object.
         var JSONObject map[string]interface{}
         err = json.Unmarshal(responseBody, &JSONObject)
         if err != nil {
           log.Fatalln(err)
         }
 
-        // (Optional) Print the request and its response:
+        // (Optional) Print the request and its response.
         print := "POST to " + TestNetURL +
           "\nPayload: " + string(jsonPayload) +
           "\nResponse status code: " + strconv.Itoa(response.StatusCode) +
           "\nResponse: " + string(responseBody) + "\n"
         fmt.Println(print)
 
-        // Return the response:
+        // Return the response.
         return JSONObject
       }
 
-      // Create the main function to form and send signed requests:
+      // Create the main function to form and send signed requests.
       func main() {
         // Generate a key pair:
         privateKey := new(xecdsa.PrivateKey)
@@ -997,7 +1015,7 @@ Below are the complete requester code examples in Golang. Click the panels to ex
         var publicKey xecdsa.PublicKey
         publicKey = privateKey.PublicKey
 
-        // Convert both private and public keys into PEM format:
+        // Convert both private and public keys into PEM format.
         x509PublicKey, err := x509.MarshalPKIXPublicKey(&publicKey)
         if err != nil {
           log.Fatalln(err)
@@ -1013,7 +1031,7 @@ Below are the complete requester code examples in Golang. Click the panels to ex
           "PRIVATE KEY", Bytes: x509PrivateKey})
 
         // The private key is required to sign requests.
-        // Make sure to put into a file to save it in some secure place later:
+        // Make sure to put it into a file to save it in a secure place later.
         file, err := os.Create("private.pem")
         if err != nil {
           fmt.Println(err)
@@ -1035,22 +1053,22 @@ Below are the complete requester code examples in Golang. Click the panels to ex
             CallParams:memberCreateCallParams {},
             PublicKey: string(pemPublicKey)},
         }
-        // Increment the JSON RPC 2.0 request identifier for future requests:
+        // Increment the JSON RPC 2.0 request identifier for future requests.
         id++
 
-        // Send the signed member.create request:
+        // Send the signed member.create request.
         newMember := sendSignedRequest(createMemberReq, privateKey)
 
         // Put the reference to your new member into a variable
-        // to send transfer requests:
+        // to send transfer requests.
         memberReference := newMember["result"].(
           map[string]interface{})["callResult"].(
           map[string]interface{})["reference"].(string)
         fmt.Println("Member reference is " + memberReference)
 
-        // Get a new seed to form a transfer request:
+        // Get a new seed to form a transfer request.
         seed = getNewSeed()
-        // Form a request body for transfer:
+        // Form a request body for transfer.
         transferReq := requestBodyWithParams{
           JSONRPC: "2.0",
           Method:  "contract.call",
@@ -1072,7 +1090,7 @@ Below are the complete requester code examples in Golang. Click the panels to ex
         // Increment the id for future requests:
         id++
 
-        // Send the signed transfer request:
+        // Send the signed transfer request.
         newTransfer := sendSignedRequest(transferReq, privateKey)
         fee := newTransfer["result"].(
           map[string]interface{})["callResult"].(
@@ -1101,7 +1119,7 @@ Below are the complete requester code examples in Golang. Click the panels to ex
 
       import (
          // You will need:
-         // - Some basic Golang functionality.
+         // - Basic Golang functionality.
          "bytes"
          "fmt"
          "golang.org/x/net/publicsuffix"
@@ -1128,18 +1146,18 @@ Below are the complete requester code examples in Golang. Click the panels to ex
          "github.com/insolar/x-crypto/x509"
       )
 
-      // Declare a structure to contain the ECDSA signature:
+      // Declare a structure to contain the ECDSA signature.
       type ecdsaSignature struct {
          R, S *big.Int
       }
 
-      // Set the endpoint URL to that of TestNet:
+      // Set the endpoint URL to that of TestNet.
       const (
          TestNetURL = "https://wallet-api.testnet.insolar.io/api/rpc"
       )
 
-      // Create and initialize an HTTP client for connection re-use
-      // and put a cookiejar into it:
+      // Create and initialize an HTTP client for connection reuse
+      // and put a cookiejar into it.
       var client *http.Client
       var jar cookiejar.Jar
       func init() {
@@ -1154,14 +1172,14 @@ Below are the complete requester code examples in Golang. Click the panels to ex
          }
       }
 
-      // Create a variable for the JSON RPC 2.0 request identifier:
+      // Create a variable for the JSON RPC 2.0 request identifier.
       var id int = 1
       // The identifier is to be incremented for every request and
       // each corresponding response will contain it.
 
       // Declare a nested structure to form requests to Insolar API
       // in accordance with the specification.
-      // The Platform uses the basic JSON RPC 2.0 request structure:
+      // The Platform uses the basic JSON RPC 2.0 request structure.
       type requestBody struct {
          JSONRPC        string         `json:"jsonrpc"`
          ID             int            `json:"id"`
@@ -1172,11 +1190,11 @@ Below are the complete requester code examples in Golang. Click the panels to ex
          JSONRPC        string         `json:"jsonrpc"`
          ID             int            `json:"id"`
          Method         string         `json:"method"`
-         // Params is a structure that depends on a particular method:
+         // Params is a structure that depends on a particular method.
          Params         interface{}    `json:"params"`
       }
 
-      // The Platform defines params of the signed request as follows:
+      // The Platform defines params of the signed request as follows.
       type params struct {
          Seed            string       `json:"seed"`
          CallSite        string       `json:"callSite"`
@@ -1191,17 +1209,17 @@ Below are the complete requester code examples in Golang. Click the panels to ex
       }
 
       // The member.create request has no parameters,
-      // so it's an empty structure:
+      // so it's an empty structure.
       type memberCreateCallParams struct {}
 
       // The transfer request sends an amount of funds to
-      // the member identified by a reference:
+      // the member identified by a reference.
       type transferCallParams struct {
          Amount            string    `json:"amount"`
          ToMemberReference string    `json:"toMemberReference"`
       }
 
-      // Create a function to get a new seed for each signed request:
+      // Create a function to get a new seed for each signed request.
       func getNewSeed() string {
          // Form a request body for getSeed:
          getSeedReq := requestBody{
@@ -1209,7 +1227,7 @@ Below are the complete requester code examples in Golang. Click the panels to ex
             Method:  "node.getSeed",
             ID:      id,
          }
-         // Increment the id for future requests:
+         // Increment the id for future requests.
          id++
 
          // Marshal the payload into JSON:
@@ -1218,7 +1236,7 @@ Below are the complete requester code examples in Golang. Click the panels to ex
             log.Fatalln(err)
          }
 
-         // Create a new HTTP request and send it:
+         // Create a new HTTP request and send it.
          seedReq, err := http.NewRequest("POST", TestNetURL,
             bytes.NewBuffer(jsonSeedReq))
          if err != nil {
@@ -1226,38 +1244,38 @@ Below are the complete requester code examples in Golang. Click the panels to ex
          }
          seedReq.Header.Set("Content-Type", "application/json")
 
-         // Perform the request:
+         // Perform the request.
          seedResponse, err := client.Do(seedReq)
          if err != nil {
             log.Fatalln(err)
          }
          defer seedReq.Body.Close()
 
-         // Receive the response body:
+         // Receive the response body.
          seedRespBody, err := ioutil.ReadAll(seedResponse.Body)
          if err != nil {
             log.Fatalln(err)
          }
 
-         // Unmarshal the response:
+         // Unmarshal the response.
          var newSeed map[string]interface{}
          err = json.Unmarshal(seedRespBody, &newSeed)
          if err != nil {
             log.Fatalln(err)
          }
 
-         // (Optional) Print the request and its response:
+         // (Optional) Print the request and its response.
          print := "POST to " + TestNetURL +
             "\nPayload: " + string(jsonSeedReq) +
             "\nResponse status code: " +  strconv.Itoa(seedResponse.StatusCode) +
             "\nResponse: " + string(seedRespBody) + "\n"
          fmt.Println(print)
 
-         // Retrieve and return the current seed:
+         // Retrieve and return the current seed.
          return newSeed["result"].(map[string]interface{})["seed"].(string)
       }
 
-      // Create a function to send signed requests:
+      // Create a function to send signed requests.
       func sendSignedRequest(payload requestBodyWithParams,
          privateKey *xecdsa.PrivateKey) map[string]interface{} {
          // Marshal the payload into JSON:
@@ -1266,16 +1284,16 @@ Below are the complete requester code examples in Golang. Click the panels to ex
             log.Fatalln(err)
          }
 
-         // Take a SHA-256 hash of the payload's bytes:
+         // Take a SHA-256 hash of the payload's bytes.
          hash := sha256.Sum256(jsonPayload)
 
-         // Sign the hash with the private key:
+         // Sign the hash with the private key.
          r, s, err := xecdsa.Sign(rand.Reader, privateKey, hash[:])
          if err != nil {
             log.Fatalln(err)
          }
 
-         // Convert the signature into ASN.1 DER format:
+         // Convert the signature into ASN.1 DER format.
          sig := ecdsaSignature{
             R: r,
             S: s,
@@ -1285,11 +1303,11 @@ Below are the complete requester code examples in Golang. Click the panels to ex
             log.Fatalln(err)
          }
 
-         // Convert both hash and signature into a Base64 string:
+         // Convert both hash and signature into a Base64 string.
          hash64 := base64.StdEncoding.EncodeToString(hash[:])
          signature64 := base64.StdEncoding.EncodeToString(signature)
 
-         // Create a new request and set its headers:
+         // Create a new request and set its headers.
          request, err := http.NewRequest("POST", TestNetURL,
             bytes.NewBuffer(jsonPayload))
          if err != nil {
@@ -1297,68 +1315,68 @@ Below are the complete requester code examples in Golang. Click the panels to ex
          }
          request.Header.Set("Content-Type", "application/json")
 
-         // Put the hash string into the HTTP Digest header:
+         // Put the hash string into the HTTP Digest header.
          request.Header.Set("Digest", "SHA-256="+hash64)
 
-         // Put the signature string into the HTTP Signature header:
+         // Put the signature string into the HTTP Signature header.
          request.Header.Set("Signature", "keyId=\"public-key\", " +
             "algorithm=\"ecdsa\", headers=\"digest\", signature="+signature64)
 
-         // Send the signed request:
+         // Send the signed request.
          response, err := client.Do(request)
          if err != nil {
             log.Fatalln(err)
          }
          defer response.Body.Close()
 
-         // Receive the response body:
+         // Receive the response body.
          responseBody, err := ioutil.ReadAll(response.Body)
          if err != nil {
             log.Fatalln(err)
          }
 
-         // Unmarshal it into a JSON object:
+         // Unmarshal it into a JSON object.
          var JSONObject map[string]interface{}
          err = json.Unmarshal(responseBody, &JSONObject)
          if err != nil {
             log.Fatalln(err)
          }
 
-         // (Optional) Print the request and its response:
+         // (Optional) Print the request and its response.
          print := "POST to " + TestNetURL +
             "\nPayload: " + string(jsonPayload) +
             "\nResponse status code: " + strconv.Itoa(response.StatusCode) +
             "\nResponse: " + string(responseBody) + "\n"
          fmt.Println(print)
 
-         // Return the response:
+         // Return the response.
          return JSONObject
       }
 
-      // Create the main function to form and send signed requests:
+      // Create the main function to form and send signed requests.
       func main() {
           // Log in to your Insolar Wallet, copy the XNS account address,
-         // allocate a variable for it and paste the value (replace the Xs).
+         // allocate a variable for it, and paste the value (replace the Xs).
          memberReference := "insolar:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
          // In the Wallet, open Settings > Reveal private key, enter your password,
-         // copy the key, allocate a variable for it and paste the value (replace the Hs).
+         // copy the key, allocate a variable for it, and paste the value (replace the Hs).
          hexPrivate := "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
 
          // Declare a new big int variable, specify the key as its value,
-         // and set its format to base 16:
+         // and set its format to base 16.
          i := new(big.Int)
          i.SetString(hexPrivate,16)
 
          // Create a new elliptic curve and feed the value to it
-         // to get the X and Y values of the public key:
+         // to get the X and Y values of the public key.
          privateKey := new(xecdsa.PrivateKey)
          privateKey.PublicKey.Curve = xelliptic.P256K()
          privateKey.D = i
          privateKey.PublicKey.X, privateKey.PublicKey.Y = xelliptic.P256K(
             ).ScalarBaseMult(i.Bytes())
 
-         // Convert the private key to PEM:
+         // Convert the private key to PEM.
          x509Encoded, err := x509.MarshalPKCS8PrivateKey(privateKey)
          if err != nil {
             panic(err)
@@ -1366,18 +1384,18 @@ Below are the complete requester code examples in Golang. Click the panels to ex
          pemPrivateKey := pem.EncodeToMemory(&pem.Block{Type:
             "PRIVATE KEY", Bytes: x509Encoded})
 
-         // Convert the public key to PEM:
+         // Convert the public key to PEM.
          x509EncodedPub, err := x509.MarshalPKIXPublicKey(&privateKey.PublicKey)
          if err != nil {
             panic(err)
          }
          pemPublicKey := pem.EncodeToMemory(&pem.Block{Type:
             "PUBLIC KEY", Bytes: x509EncodedPub})
-         // (Optional) Print the key pair:
+         // (Optional) Print the key pair.
          fmt.Println(string(pemPrivateKey))
          fmt.Println(string(pemPublicKey))
 
-         // Get a new seed to form a transfer request:
+         // Get a new seed to form a transfer request.
          seed := getNewSeed()
          // Form a request body for transfer:
          transferReq := requestBodyWithParams{
@@ -1396,10 +1414,10 @@ Below are the complete requester code examples in Golang. Click the panels to ex
                Reference: string(memberReference),
             },
          }
-         // Increment the id for future requests:
+         // Increment the id for future requests.
          id++
 
-         // Send the signed transfer request:
+         // Send the signed transfer request.
          newTransfer := sendSignedRequest(transferReq, privateKey)
          fee := newTransfer["result"].(
             map[string]interface{})["callResult"].(
