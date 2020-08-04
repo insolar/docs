@@ -1,8 +1,8 @@
 .. _building_requester:
 
-======================
-Build an API requester
-======================
+================================
+Tutorial: Build an API requester
+================================
 
 This tutorial walks you through the process of creating a simple Golang program that can invoke `Insolar MainNet API <https://apidocs.insolar.io/platform/latest>`_.
 
@@ -69,10 +69,7 @@ To automate this process, you can build a simple requester program by completing
 
 #. :ref:`Create a sender function <create_sender>` that signs and sends contract requests given a private key.
 
-#. :ref:`Generate a new private key or use an existing one <generate_key_pair>`. Choose one of the following:
-
-   * Generate a key pair, store the private key in a secure place, and register a new member in the network by sending a contract request with the public key.
-   * Log in to your Insolar Wallet, copy your private key, and convert it to an appropriate format to be able to sign requests.
+#. :ref:`Generate a new private key or use an existing one <generate_key_pair>`.
 
 #. :ref:`Form and send a transfer request <form_transfer>`: get a new seed and call the sender function.
 
