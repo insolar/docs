@@ -10,7 +10,7 @@ This tutorial walks you through the process of creating a simple Golang program 
 
 Code examples in this tutorial are straightforward, statements are successive (without conditional expressions and cycles). This lets you focus on substance rather than code structure: how to use cryptographic functions provided by Golang packages to correctly sign API requests to MainNet.
 
-You can learn to sign requests in 2 ways:
+You can learn to sign requests in two ways:
 
 * By creating a new private key (together with a new Insolar Wallet), or
 * By using an existing private key if you have already created your Wallet in the `web interface <https://wallet.testnet.insolar.io/create-new-wallet>`_.
