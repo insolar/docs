@@ -99,7 +99,7 @@ To swap your INS tokens to XNS coins and simultaneously migrate them from the Et
 
    This is a special address in the Ethereum network. Insolar monitors INS tokens sent to it and automatically migrates and swaps them to XNS coins in the Insolar network.
 
-#. Open your ERC-20 Ethereum wallet where you hold your XNS, for example, MetaMask:
+#. Open your ERC-20 Ethereum wallet where you hold your INS, for example, MetaMask:
 
    .. image:: imgs/mig-test/open-eth-wallet.png
       :width: 300px
