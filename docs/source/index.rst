@@ -34,7 +34,7 @@ If you are a developer, explore Insolar technologies and run Insolar locally for
 
     .. div:: text-muted
 
-       Explore the intricacies of Insolar architecture
+        Explore the intricacies of Insolar architecture
 
     ---
 
@@ -45,24 +45,40 @@ If you are a developer, explore Insolar technologies and run Insolar locally for
 
     .. div:: text-muted
 
-       Set up an Insolar network locally
+        Set up an Insolar network locally
 
 Exchange and wallet developers: Integrate with Insolar
 ------------------------------------------------------
 
-If you are an exchange or you wish to implement your own wallet for Insolar MainNet, explore the API references and build an API requester.
+Just like the rest of the world, Insolar is moving along the path towards decentralization.
 
 .. panels::
     :card: shadow
+    :column: col-lg-12 p-2
 
-    .. link-button:: exchanges
+    .. link-button:: decentralization
         :type: ref
-        :text: Explore the use cases
+        :text: Trace Insolar’s path to decentralization
         :classes: btn-link stretched-link font-weight-bold
 
     .. div:: text-muted
 
-        Learn what API requests to invoke and in what sequences
+       Learn what is Insolar MainNet, what infrastructure powers it, and how it is decentralized
+
+To integrate with Insolar MainNet at the current state of development, follow these steps:
+
+.. panels::
+    :card: shadow
+    :column: col-lg-4 col-md-4 col-sm-6 col-xs-12 p-2
+
+    .. link-button:: exchanges
+        :type: ref
+        :text: Follow integration scenarios
+        :classes: btn-link stretched-link font-weight-bold text-left
+
+    .. div:: text-muted
+
+        Explore integration scenarios for various use cases
 
     ---
 
@@ -73,27 +89,44 @@ If you are an exchange or you wish to implement your own wallet for Insolar Main
 
     .. div:: text-muted
 
-        Learn how to form and sign requests to Insolar MainNet API
+        :opticon:`code-square` Learn how to form and sign requests to Insolar MainNet API
 
     ---
 
-    .. link-button:: https://apidocs.insolar.io/platform/latest
-        :text: MainNet API reference
-        :classes: btn-outline-primary btn-block stretched-link
+    .. link-button:: https://github.com/insolar/observer
+        :type: url
+        :text: Run your own Observer node
+        :classes: btn-link stretched-link font-weight-bold
+        :tooltip: GitHub repository
 
     .. div:: text-muted
 
-        Explore the MainNet API for creating members and transactions
+        :opticon:`mark-github` Deploy a node that replicates MainNet data
+
+Consult the MainNet API references for implementation details:
+
+.. panels::
+    :card: shadow
+
+    .. link-button:: https://apidocs.insolar.io/platform/latest
+        :type: url
+        :text: Smart contract API reference
+        :classes: btn-link stretched-link font-weight-bold
+
+    .. div:: text-muted
+
+        :opticon:`link-external` Explore the MainNet API for creating members and transactions
 
     ---
 
     .. link-button:: https://apidocs.insolar.io/observer-services/v1
-        :text: Read-only MainNet API reference
-        :classes: btn-outline-primary btn-block stretched-link
+        :type: url
+        :text: Read-only API reference
+        :classes: btn-link stretched-link font-weight-bold
 
     .. div:: text-muted
 
-        Explore the read-only MainNet API provided by an Observer node
+        :opticon:`link-external` Explore the read-only MainNet API provided by an Observer node
 
 Users: Swap INS to XNS
 ----------------------
@@ -102,7 +135,6 @@ If you are a user, learn how to swap the token for the coin.
 
 .. panels::
     :card: shadow
-
 
     .. link-button:: migration_test
         :type: ref
@@ -148,8 +180,11 @@ If you are a user, learn how to swap the token for the coin.
    :hidden:
    :caption: Exchange developers
 
+   decentralization
    use-cases
    requester
+   Smart contract API reference <https://apidocs.insolar.io/platform/v1>
+   Read-only API reference <https://apidocs.insolar.io/observer-services/v1>
 
 .. toctree::
    :hidden:
