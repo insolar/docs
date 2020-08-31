@@ -7,9 +7,11 @@ Insolar plans to grow and support a decentralized infrastructure with a plethora
 
 Insolar’s path to decentralization is straightforward and can be illustrated as follows:
 
-.. image:: imgs/decentralization/path-to-decentralization.svg
+.. figure:: imgs/decentralization/path-to-decentralization.svg
    :width: 700px
    :align: center
+
+   Figure 1: Path to decentralization
 
 An eagle view of the MainNet maturity roadmap that leads to decentralization is in the following table:
 
@@ -106,19 +108,21 @@ What infrastructure powers Insolar MainNet?
 
 The MainNet’s little “galaxy” consists of multiple nodes:
 
-.. image:: imgs/decentralization/mainnet-nodes.svg
+.. figure:: imgs/decentralization/mainnet-nodes.svg
    :width: 700px
    :align: center
 
+   Figure 2: MainNet 1 nodes
+
 .. important::
 
-   All nodes (except Observers) on the network exchange data, and all are subject to the BFT-like consensus.
+   All nodes (except Observers) on the network exchange data, and all are subject to the :ref:`BFT-like consensus <network_consensus>`.
 
-Insolar runs all the dark-colored nodes. The nodes have several static roles:
+In figure 2, Insolar runs all the nodes except the light-colored Observer ones. Insolar nodes have several static roles:
 
-* (Green) VN—virtual nodes with powerful CPUs for smart contract execution.
-* (Blue) LMN—light material nodes with lots of RAM for block building and caching.
-* (Purple) HMN—heavy material nodes with fast SSDs for quick access to long-term storage.
+* Compute (green)—virtual nodes (VN) with powerful CPUs for smart contract execution.
+* Throughput (blue)—light material nodes (LMN) with lots of RAM for block building and caching.
+* Storage (purple)—heavy material nodes (HMN) with fast SSDs for quick access to long-term storage.
   
 .. note::
 
@@ -135,9 +139,9 @@ So, to decentralize an Insolar network, third parties only need to run more exec
 Observer nodes
 ^^^^^^^^^^^^^^
 
-Moreover, Observer nodes (yellow on the diagram) complement the network. These nodes implement important functions:
+Moreover, Observer nodes (dark and light yellow in figure 1) complement the network. These nodes implement important functions:
 
-* Replicate all the data stored by a heavy node. This data is by definition finalized.
+* Replicate all the data stored by a heavy nodes. This data is by definition finalized.
 * Transform a mesh of custom smart contracts and their interactions into business objects and transactions between them. You can easily query these objects and transactions to build fast and efficient analytics applications with excellent UX.
 * Provide a fast report service that offloads read requests from the blockchain.
 * Allow every participant to check data consistency and immutability over time.
@@ -167,19 +171,21 @@ As Insolar moves along its path to decentralization:
 * Executor nodes can be run by trusted third parties.
 * "Galaxy" arms increase in number and grow.
 
-.. image:: imgs/decentralization/mainnet2-nodes.svg
+.. figure:: imgs/decentralization/mainnet2-nodes.svg
    :width: 800px
    :align: center
 
-In the diagram above:
+   Figure 3: MainNet 2 nodes
+
+In figure 3 above:
 
 * Dark-colored nodes are those run by Insolar.
 * Light-colored nodes are those run by selected third-parties: top-tier universities, enterprises, and exchanges.
 * Yellow Observer nodes are permissionless.
 * Dotted nodes designate increasing numbers of nodes of different roles: Observers, VNs, LMNs, HMNs.
 
-Becoming decentralized
-----------------------
+Becoming fully decentralized
+----------------------------
 
 Further along the path to decentralization, all the nodes of the main network become permissionless. However, this does not hurt the desire of enterprises for a way to restrict access to sensitive data.
 
@@ -199,19 +205,23 @@ The general governance framework defines procedures and policies for:
 
 As a result, the “galactic” growth culminates in a merger with other “galaxies”, public and private, to give birth to an Insolar “Universe”.
 
-.. image:: imgs/decentralization/mainnet3-nodes.svg
+.. figure:: imgs/decentralization/mainnet3-nodes.svg
    :width: 700px
    :align: center
 
-In the diagram above, “clusters” at the end of “galactic” arms are growing private networks run by various enterprises.
+   Figure 4: MainNet 3 nodes
+
+In figure 4 above, “clusters” at the end of “galactic” arms are growing private networks run by various enterprises.
 
 Bridging to other DLTs
 ----------------------
 
 Furthermore, as discrete blockchain networks grow and expand, they will increasingly need to interact with one another. Insolar’s global network bridges to other blockchain networks and becomes a  “constellation”.
 
-.. image:: imgs/decentralization/constellation.png
+.. figure:: imgs/decentralization/constellation.png
    :width: 800px
    :align: center
+
+   Figure 5: Bridging to other DLTs
 
 Bridges facilitate seamless, trusted, low-friction interactions between enterprises.

@@ -8,6 +8,8 @@
 
 .rst-content .section ul:last-child { margin-bottom: 20px }
 
+.rst-content div.figure p:last-child.caption { margin-top: 15px; }
+
 .sphinx-tabs .container { 
     width: initial;
     margin-right: initial;

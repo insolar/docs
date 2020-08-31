@@ -10,14 +10,10 @@ To swap your INS tokens to XNS coins and simultaneously migrate them from the Et
    .. image:: imgs/mig-test/select-mainnet.png
       :width: 600px
 
-   |
-
 #. Click :guilabel:`CREATE A NEW WALLET`:
 
    .. image:: imgs/mig-test/create-ins-wallet.png
       :width: 600px
-
-   |
 
    This opens a **Wallet creation tutorial**. Read through it attentively.
 
@@ -64,14 +60,10 @@ To swap your INS tokens to XNS coins and simultaneously migrate them from the Et
    .. image:: imgs/mig-test/ins-word-order.png
       :width: 350px
 
-   |
-
 #. Wait for the wallet validation to complete and all features to become available:
 
    .. image:: imgs/mig-test/one-more-thing.png
       :width: 400px
-
-   |
 
 #. Once the wallet is created, receive congratulations from Insolar:
 
@@ -111,21 +103,15 @@ To swap your INS tokens to XNS coins and simultaneously migrate them from the Et
    .. image:: imgs/mig-test/eth-wlt-send-ins.png
       :width: 300px
 
-   |
-
 #. Paste the migration address to the :guilabel:`Add Recipient` field, enter the INS amount, select the transaction fee (in ETH), and click :guilabel:`NEXT`:
 
    .. image:: imgs/mig-test/ins-transfer-details.png
       :width: 300px
 
-   |
-
 #. Confirm the transaction details:
 
    .. image:: imgs/mig-test/confirm-eth-tx.png
       :width: 300px
-
-   |
 
 #. Wait for the transaction to go through on the Ethereum network. Optionally, check the transaction status at `Etherscan <https://etherscan.io>`_ — click the arrow button to view the transaction:
 
@@ -136,8 +122,6 @@ To swap your INS tokens to XNS coins and simultaneously migrate them from the Et
 
    .. image:: imgs/mig-test/eth-scan-tx.png
       :width: 600px
-
-   |
 
 #. Go back to the :guilabel:`SWAP` tab in your Insolar Wallet.
 
