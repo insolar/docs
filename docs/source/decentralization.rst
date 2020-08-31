@@ -141,7 +141,7 @@ Observer nodes
 
 Moreover, Observer nodes (dark and light yellow in figure 1) complement the network. These nodes implement important functions:
 
-* Replicate all the data stored by a heavy nodes. This data is by definition finalized.
+* Replicate all the data stored by heavy nodes. This data is by definition finalized.
 * Transform a mesh of custom smart contracts and their interactions into business objects and transactions between them. You can easily query these objects and transactions to build fast and efficient analytics applications with excellent UX.
 * Provide a fast report service that offloads read requests from the blockchain.
 * Allow every participant to check data consistency and immutability over time.
