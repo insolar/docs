@@ -27,7 +27,7 @@ An eagle view of the MainNet maturity roadmap that leads to decentralization is 
 |                 | deployed and used |br|        | deployed and used |br|        | deployed and used |br|        |
 |                 | by trusted parties            | by anybody                    | by anybody                    |
 +-----------------+-------------------------------+-------------------------------+-------------------------------+
-| Governance      | Managed by Insolar Foundation | Basic governance              | *Advanced on-chain*           |
+| Governance      | Managed by Insolar Foundation | Basic governance              | *Advanced on-chain* |br|      |
 |                 |                               |                               | *governance*                  |
 +-----------------+-------------------------------+-------------------------------+-------------------------------+
 | Staking         | Delegated Proof-of-Stake |br| | Delegated Proof-of-Stake |br| | Delegated Proof-of-Stake |br| |

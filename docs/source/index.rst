@@ -178,7 +178,7 @@ If you are a user, learn how to swap the token for the coin.
 
 .. toctree::
    :hidden:
-   :caption: Exchange developers
+   :caption: Exchanges
 
    decentralization
    use-cases
