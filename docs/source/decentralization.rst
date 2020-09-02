@@ -106,13 +106,13 @@ An eagle view of the MainNet maturity roadmap that leads to decentralization is 
 What infrastructure powers Insolar MainNet?
 -------------------------------------------
 
-The MainNet’s little “galaxy” consists of multiple nodes:
+Let’s consider Insolar MainNet as an ever-growing galaxy that consists of multiple nodes:
 
 .. figure:: imgs/decentralization/mainnet-nodes.svg
    :width: 700px
    :align: center
 
-   Figure 2: MainNet 1 nodes
+   Figure 2: MainNet 1—a little galaxy of nodes
 
 .. important::
 
@@ -120,15 +120,24 @@ The MainNet’s little “galaxy” consists of multiple nodes:
 
 In figure 2, Insolar runs all the nodes except the light-colored Observer ones. Insolar nodes have several static roles:
 
-* Compute (green)—virtual nodes (VN) with powerful CPUs for smart contract execution.
-* Throughput (blue)—light material nodes (LMN) with lots of RAM for block building and caching.
-* Storage (purple)—heavy material nodes (HMN) with fast SSDs for quick access to long-term storage.
+.. |compute| image:: imgs/decentralization/Compute.svg
+             :width: 30px
+.. |throughput| image:: imgs/decentralization/Throughput.svg
+                :width: 30px
+.. |storage| image:: imgs/decentralization/Storage.svg
+             :width: 30px
+.. |observer| image:: imgs/decentralization/Observer.svg
+              :width: 30px
+
+|compute| Compute—virtual nodes (compute) with powerful CPUs for smart contract execution.
+
+|throughput| Throughput—light material nodes (LMN) with lots of RAM for block building and caching.
+
+|storage| Storage—heavy material nodes (HMN) with fast SSDs for quick access to long-term storage.
   
 .. note::
 
-   (Dark and light yellow) Observer nodes do not participate in consensus, they replicate the finalized MainNet data and rebuild the data in a relational form.
-    
-   In particular, this allows to check data consistency and immutability over time. Read more on Observer nodes below.
+   |observer| Observer nodes do not participate in consensus, they replicate the finalized MainNet data and rebuild the data in a relational form. In particular, this allows to check data consistency and immutability over time. Read more on Observer nodes below.
 
 For more information on node roles, see the :ref:`Multi-role nodes <multi_role_nodes>` section.
 
@@ -168,21 +177,21 @@ The next step towards decentralization
 As Insolar moves along its path to decentralization:
 
 * Observer nodes become permissionless.
-* Executor nodes can be run by trusted third parties.
+* Executor and validator nodes of all roles can be run by trusted third parties.
 * "Galaxy" arms increase in number and grow.
 
 .. figure:: imgs/decentralization/mainnet2-nodes.svg
    :width: 800px
    :align: center
 
-   Figure 3: MainNet 2 nodes
+   Figure 3: MainNet 2—an expanded galaxy of nodes
 
 In figure 3 above:
 
-* Dark-colored nodes are those run by Insolar.
-* Light-colored nodes are those run by selected third-parties: top-tier universities, enterprises, and exchanges.
+* Dark-colored nodes are run by Insolar.
+* Light-colored nodes are run by selected third-parties: top-tier universities, enterprises, and exchanges.
 * Yellow Observer nodes are permissionless.
-* Dotted nodes designate increasing numbers of nodes of different roles: Observers, VNs, LMNs, HMNs.
+* Dotted "+" nodes designate increasing numbers of nodes of different roles: Observers, Compute, Throughput, Storage.
 
 Becoming fully decentralized
 ----------------------------
@@ -209,19 +218,19 @@ As a result, the “galactic” growth culminates in a merger with other “gala
    :width: 700px
    :align: center
 
-   Figure 4: MainNet 3 nodes
+   Figure 4: MainNet 3—merger of public and private galaxies
 
 In figure 4 above, “clusters” at the end of “galactic” arms are growing private networks run by various enterprises.
 
 Bridging to other DLTs
 ----------------------
 
-Furthermore, as discrete blockchain networks grow and expand, they will increasingly need to interact with one another. Insolar’s global network bridges to other blockchain networks and becomes a  “constellation”.
+Furthermore, as discrete blockchain networks grow and expand, they will increasingly need to interact with one another. Insolar’s global network bridges to other blockchain networks and becomes a “constellation”.
 
-.. figure:: imgs/decentralization/constellation.png
+.. figure:: imgs/decentralization/constellation.svg
    :width: 800px
    :align: center
 
-   Figure 5: Bridging to other DLTs
+   Figure 5: Constellation of networks
 
 Bridges facilitate seamless, trusted, low-friction interactions between enterprises.
