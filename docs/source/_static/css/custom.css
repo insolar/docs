@@ -1,3 +1,5 @@
+.mopinion-survey-content .btn, .mopinion-survey-content button, #surveyWindowWrap .btn-open-slider { padding: 12px 24px !important; }
+
 .rst-content .section .admonition p:last-child { margin-bottom: 0 !important }
 
 .rst-content .section ol li a img { margin-bottom: 20px }
