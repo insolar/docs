@@ -23,7 +23,7 @@ If you are a developer, explore Insolar technologies and run Insolar locally for
     
     .. div:: text-muted
 
-        Take a look at the big picture
+        :opticon:`book` Take a look at the big picture
 
     ---
 
@@ -34,7 +34,7 @@ If you are a developer, explore Insolar technologies and run Insolar locally for
 
     .. div:: text-muted
 
-        Explore the intricacies of Insolar architecture
+        :opticon:`book` Explore the intricacies of Insolar architecture
 
     ---
 
@@ -45,7 +45,7 @@ If you are a developer, explore Insolar technologies and run Insolar locally for
 
     .. div:: text-muted
 
-        Set up an Insolar network locally
+        :opticon:`list-ordered` Set up an Insolar network locally
 
 Exchange and wallet developers: Integrate with Insolar
 ------------------------------------------------------
@@ -63,7 +63,7 @@ Just like the rest of the world, Insolar is moving along the path towards decent
 
     .. div:: text-muted
 
-       Learn what is Insolar MainNet, what infrastructure powers it, and how it is decentralized
+       :opticon:`book` Learn what is Insolar MainNet, what infrastructure powers it, and how it is decentralized
 
 To integrate with Insolar MainNet at the current state of development, follow these steps:
 
@@ -78,7 +78,7 @@ To integrate with Insolar MainNet at the current state of development, follow th
 
     .. div:: text-muted
 
-        Explore integration scenarios for various use cases
+        :opticon:`list-ordered` Explore integration scenarios for various use cases
 
     ---
 
@@ -143,7 +143,7 @@ If you are a user, learn how to swap the token for the coin.
 
     .. div:: text-muted
 
-        On the TestNet, get test INS tokens and swap them for test XNS coins
+        :opticon:`list-ordered` On the TestNet, get test INS tokens and swap them for test XNS coins
 
     ---
 
@@ -154,7 +154,7 @@ If you are a user, learn how to swap the token for the coin.
 
     .. div:: text-muted
 
-        On the MainNet, swap your INS tokens for XNS coins native to MainNet
+        :opticon:`list-ordered` On the MainNet, swap your INS tokens for XNS coins native to MainNet
 
     ---
 
@@ -165,7 +165,7 @@ If you are a user, learn how to swap the token for the coin.
 
     .. div:: text-muted
 
-        Store and manage XNS via Ledger Nano S or X
+        :opticon:`list-ordered` Store and manage XNS via Ledger Nano S or X
 
 .. toctree::
    :hidden:

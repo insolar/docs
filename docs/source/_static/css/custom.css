@@ -1,5 +1,3 @@
-.mopinion-survey-content .btn, .mopinion-survey-content button, #surveyWindowWrap .btn-open-slider { padding: 12px 24px !important; }
-
 .rst-content .section .admonition p:last-child { margin-bottom: 0 !important }
 
 .rst-content .section ol li a img { margin-bottom: 20px }
@@ -79,7 +77,6 @@ b, strong {
 
 .btn  {
     font-family: 'IBM Plex Sans', sans-serif;
-    padding: .375rem 0rem !important;
 }
 
 .btn-link:visited {color: #9B59B6 !important }
