@@ -4,9 +4,9 @@
 Tutorial: Build an API requester
 ================================
 
-This tutorial walks you through the process of creating a simple Golang program that can invoke `Insolar MainNet API <https://apidocs.insolar.io/platform/latest>`_.
+This tutorial walks you through the process of creating a simple Golang program that can call `Insolar MainNet API <https://apidocs.insolar.io/platform/latest>`_.
 
-.. note:: You can also use the `CLI tool <https://github.com/insolar/mainnet/tree/master/application/cmd/requester>`_ of the same name (requester) to invoke the API.
+.. note:: You can also use the `CLI tool <https://github.com/insolar/mainnet/tree/master/application/cmd/requester>`_ of the same name (requester) to call the API.
 
 Code examples in this tutorial are straightforward, statements are successive (without conditional expressions and cycles). This lets you focus on substance rather than code structure: how to use cryptographic functions provided by Golang packages to correctly sign API requests to MainNet.
 
@@ -184,7 +184,7 @@ Next, declare request structures in accordance with the Insolar API specificatio
 Step 2: Declare request structures
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To invoke the MainNet (or TestNet) API, you need structures for three requests: `seed getter <https://apidocs.insolar.io/platform/v1#operation/get-seed>`_, `member creation <https://apidocs.insolar.io/platform/v1#operation/member-create>`_, and `transfer <https://apidocs.insolar.io/platform/v1#operation/member-transfer>`_.
+To call the MainNet (or TestNet) API, you need structures for three requests: `seed getter <https://apidocs.insolar.io/platform/v1#operation/get-seed>`_, `member creation <https://apidocs.insolar.io/platform/v1#operation/member-create>`_, and `transfer <https://apidocs.insolar.io/platform/v1#operation/member-transfer>`_.
 
 All the requests have the same base structure in accordance with the `JSON RPC 2.0 specification <https://www.jsonrpc.org/specification>`_. For example:
 
