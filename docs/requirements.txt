@@ -1,6 +1,8 @@
 # sphinxcontrib-golangdomain
-sphinx>=2
+sphinx<7
+sphinx_rtd_theme
 sphinx-tabs
 sphinxcontrib-plantuml
 sphinx-copybutton
 sphinxcontrib-contentui
+sphinx-panels
